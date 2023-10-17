@@ -128,6 +128,7 @@ de nuestro proyecto
 6. Si alguien usa la rama MAIN/MASTER para trabajar le tocara resolver el MERGE que se cause
 7. El codigo debe de tener identaciones
 8. DE NO CUMPLIR CON LAS CONDICIONES NO SE ACEPTARA SU COMMIT HASTA QUE SE CORRIGAN LOS PUNTOS 2 y 7
+9. Los archivos de composer.json y composer.lock NUNCA se deben de subir en su commit
 
 
 
