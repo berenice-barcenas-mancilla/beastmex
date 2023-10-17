@@ -115,3 +115,19 @@
 >>>> SECCION DE COMENTARIOS
 ***********************************************************************
 */
+
+
+//COMENTARIOS DE BERE:
+1. Chicos dejen aqui sus comentarios
+2. Mantegamos el codigo limpio. Los comentarios en el codigo solo deben de ser explicativos para 
+el mismo por favor
+3. Recuerden que el proyecto se trabajara en ramas, para evitar conflictos
+4. Nadie tiene autorizado usar la rama MASTER/MAIN esta solo se usara para subir las integraciones o MERGE 
+de nuestro proyecto
+5. Cada uno debera de trabajar en su rama
+6. Si alguien usa la rama MAIN/MASTER para trabajar le tocara resolver el MERGE que se cause
+7. El codigo debe de tener identaciones
+8. DE NO CUMPLIR CON LAS CONDICIONES NO SE ACEPTARA SU COMMIT HASTA QUE SE CORRIGAN LOS PUNTOS 2 y 7
+
+
+
