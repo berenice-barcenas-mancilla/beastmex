@@ -133,3 +133,7 @@ de nuestro proyecto
 
 //COMENTARIOS DE Diego
 1. Dios se apiade de nosotros, amen
+
+//COMENTARIOS DE EDGAR:
+1. PRIMER COMMIT
+
