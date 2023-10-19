@@ -130,6 +130,10 @@ de nuestro proyecto
 8. DE NO CUMPLIR CON LAS CONDICIONES NO SE ACEPTARA SU COMMIT HASTA QUE SE CORRIGAN LOS PUNTOS 2 y 7
 9. Los archivos de composer.json y composer.lock NUNCA se deben de subir en su commit
 
+
+//COMENTARIOS DE Diego
+1. Dios se apiade de nosotros, amen
+
 //COMENTARIOS DE EDGAR:
 1. PRIMER COMMIT
 
