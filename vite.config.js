@@ -19,4 +19,5 @@ export default defineConfig({
             // Fin Importamos Bootstrap 5
         }),
     ],
+})
 });
