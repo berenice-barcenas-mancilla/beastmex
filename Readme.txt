@@ -136,4 +136,6 @@ de nuestro proyecto
 
 //COMENTARIOS DE EDGAR:
 1. PRIMER COMMIT
+2. Probando si los cambios funcionan en linux.
+3. Prueba de VSCode.
 
