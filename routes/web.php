@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+//importación de controlador para el módulo almacen
+use App\Http\Controllers\StorageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +33,18 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//creación de rutas para el módulo almacen
+
+Route::get('/storage', [StorageController::class, 'Dashboard'])->name('storage.dashboard');
+
+Route::get('/storage/productos', [StorageController::class, 'MethodViewStorage'])->name('storage.productos');
+
+Route::get('/storage/productos/create', [StorageController::class, 'MethodCreateStorage'])->name('storage.create');
+
+Route::get('/storage/productos/edit',   [StorageController::class, 'MethodEditStorage'])->name('storage.edit');
+
+
+
+
