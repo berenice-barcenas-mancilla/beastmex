@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GerenciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,12 @@ require __DIR__.'/auth.php';
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+/* Rutas para módulo gerencia */
+
+Route::controller(GerenciaController::class)->group(function (){
+    Route::get('/gerencia', 'index')->name('indexgerencia');
+});
+
+
