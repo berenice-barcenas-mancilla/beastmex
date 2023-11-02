@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>BEASTMEX</title>
-    <link rel="shortcut icon" href="/images/icon2.png" />
+    <link rel="shortcut icon" href="/images/bm.ico" />
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/dashboard.css">
