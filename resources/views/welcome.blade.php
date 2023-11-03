@@ -33,7 +33,7 @@
             </div>
         @endif
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <img src="{{ asset('images/imagen.png') }}" alt="Icono 2">
+            <img src="{{ asset('images/icon.png') }}" alt="Beastmex" style="width:450px; height:450px;">
         </div>
         
     </div>
