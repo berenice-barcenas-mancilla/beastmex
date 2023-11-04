@@ -1,33 +1,16 @@
-hr {
-    background-color: white; /* Cambia este valor al color que desees */
-    height: 3px; /* Altura de la línea horizontal */
-    /* border: none; Elimina el borde por defecto */
-}
+html, body{
+    background-color: #002F2E;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .contenedor {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    background-color: #043D3C;
+    height: 80%;
+    width: 80%;
+    border-radius: 10px;
 
-        /* Add a black background color to the top navigation */
-        .topnav {
-            background-color: #002F2E;
-            overflow: hidden;
-        }
-
-        /* Style the links in the navigation bar */
-        .topnav a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        /* Change the color of links on hover */
-        .topnav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        /* Add a color to the active/current link */
-        .topnav a.active {
-            background-color: #4CAF50;
-            color: white;
-        }
+  }

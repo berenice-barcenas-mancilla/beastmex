@@ -12,4 +12,9 @@ class GerenciaController extends Controller
         return view('gerencia/dashboardgerencia');
     }
 
+    public function generarusuario()
+    {
+        return view('gerencia/generarusuario');
+    }
+
 }

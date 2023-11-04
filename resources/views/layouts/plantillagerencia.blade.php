@@ -11,7 +11,7 @@
 
 
 </head>
-<body style="background: #043D3C;">
+<body>
     
     @include('partials.navbargerencia')
 

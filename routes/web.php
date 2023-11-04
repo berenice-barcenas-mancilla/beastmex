@@ -138,7 +138,11 @@ require __DIR__.'/auth.php';
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-//Rutas gerencia
-
-Route::get('/gerencia', [GerenciaController::class, 'indexgerencia'])->name('gerencia');
+  /*
+    ***********************************************************************
+    >>>> Rutas Gerencia
+    ***********************************************************************
+    */
+    Route::get('/gerencia', [GerenciaController::class, 'indexgerencia'])->name('gerencia');
+    
+    Route::get('/gerencia/generarusuario', [GerenciaController::class, 'generarusuario'])->name('genusuario');
