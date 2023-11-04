@@ -1,0 +1,16 @@
+html, body{
+    background-color: #002F2E;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .contenedor {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    background-color: #043D3C;
+    height: 80%;
+    width: 80%;
+    border-radius: 10px;
+
+  }
