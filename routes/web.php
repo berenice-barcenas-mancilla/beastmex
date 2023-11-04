@@ -26,7 +26,6 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
    
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
-   // Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['auth', IsActive::class])->name('dashboard');
 
     
     
@@ -92,12 +91,17 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     >>>> Storage catalogue
     ***********************************************************************
     */
+
+    //list
     Route::get('/storage', [StorageController::class, 'Dashboard'])->name('storage.dashboard');
 
+    //Info
     Route::get('/storage/productos', [StorageController::class, 'MethodViewStorage'])->name('storage.productos');
 
+    //Store
     Route::get('/storage/productos/create', [StorageController::class, 'MethodCreateStorage'])->name('storage.create');
 
+    //Update
     Route::get('/storage/productos/edit',   [StorageController::class, 'MethodEditStorage'])->name('storage.edit');
 
 
@@ -135,13 +139,6 @@ require __DIR__.'/auth.php';
 
 
 
-
-//Auth::routes();
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/dashboard', function () {
-//   return view('dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
-     
 
 
 

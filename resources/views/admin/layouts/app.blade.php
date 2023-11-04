@@ -19,7 +19,6 @@
         <link href="/assets/css/themes/layout/brand/dark.css?v=7.0.6" rel="stylesheet" type="text/css"/>
         <link href="/assets/css/themes/layout/aside/dark.css?v=7.0.6" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" href="/images/bm.ico"/>
-
         <!-- Se agrega la libreria del Toastr -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -42,8 +41,7 @@
         <div id="kt_header_mobile" class="header-mobile align-items-center  header-mobile-fixed " >
             <!--begin::Logo-->
             <a href="/dashboard">
-                <img width="80%" alt="Beastmex" src="/images/icono2.png"/>
-
+                <img width="80%" alt="Beastmex" src="/images/beastmex.png"/>
             </a>
             <!--end::Logo-->
 
@@ -57,7 +55,7 @@
                     <span></span>
                 </button>
 
-                <button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
+                <button class="btn btn-hover-text-success p-0 ml-2" id="kt_header_mobile_topbar_toggle">
                     <span class="svg-icon svg-icon-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -78,12 +76,12 @@
             <div class="d-flex flex-row flex-column-fluid page">
 
                 <!--begin::Aside-->
-                <div class="aside aside-left  aside-fixed  d-flex flex-column flex-row-auto"  id="kt_aside">
+                <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside" style="background-color: #002F2E;">
                     <!--begin::Brand-->
                     <div class="brand flex-column-auto " id="kt_brand">
                         <!--begin::Logo-->
                         <a href="/dashboard" class="brand-logo">
-                            <img alt="Beastmex" width="80%" src="/images/icon2.png"/>
+                            <img alt="Beastmex" width="80%" src="/images/icon.png"/ style="width:50px; height:50px;">
                         </a>
                         <!--end::Logo-->
 
@@ -170,7 +168,7 @@
                                 
                                 {{-- Se define la sección del menú --}}
                                 <li class="menu-section ">
-                                    <h4 class="menu-text">ADMINISTRACIÓN DE CATÁLOGOS</h4>
+                                    <h4 class="menu-text">ADMINISTRACIÓN DE PROVEEDORES</h4>
                                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                                 </li>
 
@@ -192,12 +190,12 @@
                                     <div class="menu-submenu ">
                                         <i class="menu-arrow"></i>
                                         <ul class="menu-subnav">
-                                             
+                                            
                                             {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
                                             Si se tiene permiso se muestra la opción--}}
-                                            @can('system.records.list')
-                                            <li class="menu-item @if($PAGE_NAVIGATION == 'TRAININGS') menu-item-active @endif" aria-haspopup="true" >
-                                                <a href="/records" class="menu-link ">
+                                            @can('system.provedores.list')
+                                            <li class="menu-item @if($PAGE_NAVIGATION == 'PROVEDOR') menu-item-active @endif" aria-haspopup="true" >
+                                                <a href="/provedores" class="menu-link ">
                                                     <span class="svg-icon menu-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -208,7 +206,38 @@
                                                             </g>
                                                         </svg><!--end::Svg Icon-->
                                                     </span>
-                                                    <span class="menu-text"> Ventas</span>
+                                                    <span class="menu-text">Proveedores</span>
+                                                </a>
+                                            </li>
+                                            @endcan
+
+
+
+                                        </ul>
+                                    </div>
+                                </li>
+                                
+                                {{-- Se define la sección del menú --}}
+                                <li class="menu-section ">
+                                    <h4 class="menu-text">PANEL BEASTMEX</h4>
+                                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                                </li>
+                                 {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
+                                            Si se tiene permiso se muestra la opción--}}
+                                            @can('system.store.list')
+                                            <li class="menu-item @if($PAGE_NAVIGATION == 'STORE') menu-item-active @endif" aria-haspopup="true" >
+                                                <a href="/storage" class="menu-link ">
+                                                    <span class="svg-icon menu-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                <rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2"/>
+                                                                <rect fill="#000000" x="2" y="8" width="20" height="3"/>
+                                                                <rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1"/>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                    <span class="menu-text"> Almacen</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -216,9 +245,9 @@
                                             
                                             {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
                                             Si se tiene permiso se muestra la opción--}}
-                                            @can('system.contracts.list')
-                                            <li class="menu-item @if($PAGE_NAVIGATION == 'CONTRACTS') menu-item-active @endif" aria-haspopup="true" >
-                                                <a href="/contracts" class="menu-link ">
+                                            @can('system.shop.list')
+                                            <li class="menu-item @if($PAGE_NAVIGATION == 'SHOP') menu-item-active @endif" aria-haspopup="true" >
+                                                <a href="/shop" class="menu-link ">
                                                     <span class="svg-icon menu-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -228,7 +257,7 @@
                                                             </g>
                                                         </svg><!--end::Svg Icon-->
                                                     </span>
-                                                    <span class="menu-text">Almacen</span>
+                                                    <span class="menu-text">Compras</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -236,9 +265,9 @@
 
                                             {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
                                             Si se tiene permiso se muestra la opción--}}
-                                            @can('system.trainings.list')
-                                            <li class="menu-item @if($PAGE_NAVIGATION == 'TRAININGS') menu-item-active @endif" aria-haspopup="true" >
-                                                <a href="/trainings" class="menu-link ">
+                                            @can('system.management.list')
+                                            <li class="menu-item @if($PAGE_NAVIGATION == 'MANAGEMENT') menu-item-active @endif" aria-haspopup="true" >
+                                                <a href="/management" class="menu-link ">
                                                     <span class="svg-icon menu-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -256,9 +285,9 @@
 
                                             {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
                                             Si se tiene permiso se muestra la opción--}}
-                                            @can('system.documents.list')
-                                            <li class="menu-item @if($PAGE_NAVIGATION == 'DOCUMENTS') menu-item-active @endif" aria-haspopup="true" >
-                                                <a href="/documents" class="menu-link ">
+                                            @can('system.seller.list')
+                                            <li class="menu-item @if($PAGE_NAVIGATION == 'SELLER') menu-item-active @endif" aria-haspopup="true" >
+                                                <a href="/seller" class="menu-link ">
                                                     <span class="svg-icon menu-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -269,19 +298,11 @@
                                                             </g>
                                                         </svg><!--end::Svg Icon-->
                                                     </span>
-                                                    <span class="menu-text">Compras</span>
+                                                    <span class="menu-text">Ventas</span>
                                                 </a>
                                             </li>
                                             @endcan
 
-
-
-
-                                        </ul>
-                                    </div>
-                                </li>
-                                
-                               
                                 @can('system.reports.list')
                                 {{-- Se define la sección del menú --}}
                                 <li class="menu-section ">
@@ -538,11 +559,6 @@
 
 
         @yield('javascript')
-
-        @if(isset($chart))
-            {!! $chart->renderChartJsLibrary() !!}
-            {!! $chart->renderJs() !!}
-        @endif
 
     </body>
     <!--end::Body-->
