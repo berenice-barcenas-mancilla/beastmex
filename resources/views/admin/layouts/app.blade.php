@@ -18,7 +18,7 @@
         <link href="/assets/css/themes/layout/header/menu/light.css?v=7.0.6" rel="stylesheet" type="text/css"/>
         <link href="/assets/css/themes/layout/brand/dark.css?v=7.0.6" rel="stylesheet" type="text/css"/>
         <link href="/assets/css/themes/layout/aside/dark.css?v=7.0.6" rel="stylesheet" type="text/css"/>
-        <link rel="shortcut icon" href="/images/favicon.png"/>
+        <link rel="shortcut icon" href="/images/bm.ico"/>
 
         <!-- Se agrega la libreria del Toastr -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -208,7 +208,7 @@
                                                             </g>
                                                         </svg><!--end::Svg Icon-->
                                                     </span>
-                                                    <span class="menu-text"> Actas administrativas</span>
+                                                    <span class="menu-text"> Ventas</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -228,7 +228,7 @@
                                                             </g>
                                                         </svg><!--end::Svg Icon-->
                                                     </span>
-                                                    <span class="menu-text">Contratos</span>
+                                                    <span class="menu-text">Almacen</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -248,7 +248,7 @@
                                                             </g>
                                                         </svg><!--end::Svg Icon-->
                                                     </span>
-                                                    <span class="menu-text">Capacitaciones del personal</span>
+                                                    <span class="menu-text">Gerencia</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -269,113 +269,19 @@
                                                             </g>
                                                         </svg><!--end::Svg Icon-->
                                                     </span>
-                                                    <span class="menu-text">Documentos</span>
+                                                    <span class="menu-text">Compras</span>
                                                 </a>
                                             </li>
                                             @endcan
 
 
-                                            {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
-                                            Si se tiene permiso se muestra la opción--}}
-                                            @can('system.computers.list')
-                                            <li class="menu-item @if($PAGE_NAVIGATION == 'COMPUTERS') menu-item-active @endif" aria-haspopup="true" >
-                                                <a href="/computers" class="menu-link ">
-                                                    <span class="svg-icon menu-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                <rect x="0" y="0" width="24" height="24"/>
-                                                                <path d="M6,8 L6,16 L18,16 L18,8 L6,8 Z M20,16 L21.381966,16 C21.7607381,16 22.1070012,16.2140024 22.2763932,16.5527864 L22.5,17 C22.6706654,17.3413307 22.5323138,17.7563856 22.190983,17.927051 C22.0950363,17.9750244 21.9892377,18 21.881966,18 L2.11803399,18 C1.73641461,18 1.42705098,17.6906364 1.42705098,17.309017 C1.42705098,17.2017453 1.45202663,17.0959467 1.5,17 L1.7236068,16.5527864 C1.89299881,16.2140024 2.23926193,16 2.61803399,16 L4,16 L4,8 C4,6.8954305 4.8954305,6 6,6 L18,6 C19.1045695,6 20,6.8954305 20,8 L20,16 Z" fill="#000000" fill-rule="nonzero"/>
-                                                                <polygon fill="#000000" opacity="0.3" points="6 8 6 16 18 16 18 8"/>
-                                                            </g>
-                                                        </svg><!--end::Svg Icon-->
-                                                    </span>
-                                                    <span class="menu-text">Equipos de computo</span>
-                                                </a>
-                                            </li>
-                                            @endcan
 
 
-                                            {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
-                                            Si se tiene permiso se muestra la opción--}}
-                                            @can('system.positions.list')
-                                            <li class="menu-item @if($PAGE_NAVIGATION == 'POSITIONS') menu-item-active @endif" aria-haspopup="true" >
-                                                <a href="/positions" class="menu-link ">
-                                                    <span class="svg-icon menu-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                <rect x="0" y="0" width="24" height="24"/>
-                                                                <path d="M15.9497475,3.80761184 L13.0246125,6.73274681 C12.2435639,7.51379539 12.2435639,8.78012535 13.0246125,9.56117394 L14.4388261,10.9753875 C15.2198746,11.7564361 16.4862046,11.7564361 17.2672532,10.9753875 L20.1923882,8.05025253 C20.7341101,10.0447871 20.2295941,12.2556873 18.674559,13.8107223 C16.8453326,15.6399488 14.1085592,16.0155296 11.8839934,14.9444337 L6.75735931,20.0710678 C5.97631073,20.8521164 4.70998077,20.8521164 3.92893219,20.0710678 C3.1478836,19.2900192 3.1478836,18.0236893 3.92893219,17.2426407 L9.05556629,12.1160066 C7.98447038,9.89144078 8.36005124,7.15466739 10.1892777,5.32544095 C11.7443127,3.77040588 13.9552129,3.26588995 15.9497475,3.80761184 Z" fill="#000000"/>
-                                                                <path d="M16.6568542,5.92893219 L18.0710678,7.34314575 C18.4615921,7.73367004 18.4615921,8.36683502 18.0710678,8.75735931 L16.6913928,10.1370344 C16.3008685,10.5275587 15.6677035,10.5275587 15.2771792,10.1370344 L13.8629656,8.7228208 C13.4724413,8.33229651 13.4724413,7.69913153 13.8629656,7.30860724 L15.2426407,5.92893219 C15.633165,5.5384079 16.26633,5.5384079 16.6568542,5.92893219 Z" fill="#000000" opacity="0.3"/>
-                                                            </g>
-                                                        </svg><!--end::Svg Icon-->
-                                                    </span>
-                                                    <span class="menu-text">Puestos</span>
-                                                </a>
-                                            </li>
-                                            @endcan
-
-                                            {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
-                                            Si se tiene permiso se muestra la opción--}}
-                                            @can('system.uniforms.list')
-                                            <li class="menu-item @if($PAGE_NAVIGATION == 'UNIFORMS') menu-item-active @endif" aria-haspopup="true" >
-                                                <a href="/uniforms" class="menu-link ">
-                                                    <span class="svg-icon menu-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                <rect x="0" y="0" width="24" height="24"/>
-                                                                <path d="M6.182345,4.09500888 C6.73256296,3.42637697 7.56648864,3 8.5,3 L15.5,3 C16.4330994,3 17.266701,3.42600075 17.8169264,4.09412386 C17.8385143,4.10460774 17.8598828,4.11593789 17.8809917,4.1281251 L22.5900048,6.8468751 C23.0682974,7.12301748 23.2321726,7.73460788 22.9560302,8.21290051 L21.2997802,11.0816097 C21.0236378,11.5599023 20.4120474,11.7237774 19.9337548,11.4476351 L18.5,10.6198563 L18.5,19 C18.5,19.5522847 18.0522847,20 17.5,20 L6.5,20 C5.94771525,20 5.5,19.5522847 5.5,19 L5.5,10.6204852 L4.0673344,11.4476351 C3.58904177,11.7237774 2.97745137,11.5599023 2.70130899,11.0816097 L1.04505899,8.21290051 C0.768916618,7.73460788 0.932791773,7.12301748 1.4110844,6.8468751 L6.12009753,4.1281251 C6.14061376,4.11628005 6.16137525,4.10524462 6.182345,4.09500888 Z" fill="#000000" opacity="0.3"/>
-                                                                <path d="M9.85156673,3.2226499 L9.26236944,4.10644584 C9.11517039,4.32724441 9.1661011,4.62457583 9.37839459,4.78379594 L11,6 L10.0353553,12.7525126 C10.0130986,12.9083095 10.0654932,13.0654932 10.1767767,13.1767767 L11.6464466,14.6464466 C11.8417088,14.8417088 12.1582912,14.8417088 12.3535534,14.6464466 L13.8232233,13.1767767 C13.9345068,13.0654932 13.9869014,12.9083095 13.9646447,12.7525126 L13,6 L14.6216054,4.78379594 C14.8338989,4.62457583 14.8848296,4.32724441 14.7376306,4.10644584 L14.1484333,3.2226499 C14.0557004,3.08355057 13.8995847,3 13.7324081,3 L10.2675919,3 C10.1004153,3 9.94429962,3.08355057 9.85156673,3.2226499 Z" fill="#000000"/>
-                                                            </g>
-                                                        </svg><!--end::Svg Icon-->
-                                                    </span>
-                                                    <span class="menu-text">Uniformes del personal</span>
-                                                </a>
-                                            </li>
-                                            @endcan
                                         </ul>
                                     </div>
                                 </li>
                                 
-                                @can('system.employees.list')
-                                {{-- Se define la sección del menú --}}
-                                <li class="menu-section ">
-                                    <h4 class="menu-text">ADMINISTRACIÓN DEL PERSONAL</h4>
-                                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-                                </li>
-
-                                {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
-                                Si se tiene permiso se muestra la opción--}}
-                                <li class="menu-item @if($PAGE_NAVIGATION == 'EMPLOYEES') menu-item-active @endif" aria-haspopup="true" >
-                                    <a href="/employees" class="menu-link ">
-                                        <span class="svg-icon menu-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"/>
-                                                <path d="M18,2 L20,2 C21.6568542,2 23,3.34314575 23,5 L23,19 C23,20.6568542 21.6568542,22 20,22 L18,22 L18,2 Z" fill="#000000" opacity="0.3"/>
-                                                <path d="M5,2 L17,2 C18.6568542,2 20,3.34314575 20,5 L20,19 C20,20.6568542 18.6568542,22 17,22 L5,22 C4.44771525,22 4,21.5522847 4,21 L4,3 C4,2.44771525 4.44771525,2 5,2 Z M12,11 C13.1045695,11 14,10.1045695 14,9 C14,7.8954305 13.1045695,7 12,7 C10.8954305,7 10,7.8954305 10,9 C10,10.1045695 10.8954305,11 12,11 Z M7.00036205,16.4995035 C6.98863236,16.6619875 7.26484009,17 7.4041679,17 C11.463736,17 14.5228466,17 16.5815,17 C16.9988413,17 17.0053266,16.6221713 16.9988413,16.5 C16.8360465,13.4332455 14.6506758,12 11.9907452,12 C9.36772908,12 7.21569918,13.5165724 7.00036205,16.4995035 Z" fill="#000000"/>
-                                            </g>
-                                        </svg><!--end::Svg Icon--></span>
-                                        <span class="menu-text">Empleados</span>
-                                    </a>
-                                </li>
-
-                                <li class="menu-item @if($PAGE_NAVIGATION == 'ERRORS') menu-item-active @endif" aria-haspopup="true" >
-                                    <a href="/errors" class="menu-link ">
-                                        <span class="svg-icon menu-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24"/>
-                                                    <path d="M11.1669899,4.49941818 L2.82535718,19.5143571 C2.557144,19.9971408 2.7310878,20.6059441 3.21387153,20.8741573 C3.36242953,20.9566895 3.52957021,21 3.69951446,21 L21.2169432,21 C21.7692279,21 22.2169432,20.5522847 22.2169432,20 C22.2169432,19.8159952 22.1661743,19.6355579 22.070225,19.47855 L12.894429,4.4636111 C12.6064401,3.99235656 11.9909517,3.84379039 11.5196972,4.13177928 C11.3723594,4.22181902 11.2508468,4.34847583 11.1669899,4.49941818 Z" fill="#000000" opacity="0.3"/>
-                                                    <rect fill="#000000" x="11" y="9" width="2" height="7" rx="1"/>
-                                                    <rect fill="#000000" x="11" y="17" width="2" height="2" rx="1"/>
-                                                </g>
-                                            </svg><!--end::Svg Icon-->
-                                        </span>
-                                        <span class="menu-text">Errores de importación</span>
-                                    </a>
-                                </li>
-                                @endcan
-                             
+                               
                                 @can('system.reports.list')
                                 {{-- Se define la sección del menú --}}
                                 <li class="menu-section ">
@@ -463,9 +369,7 @@
 
                             <!--begin::Topbar-->
                             <div class="topbar">
-                                
-                                @livewire('notifications')
-
+                            
                                 <!--begin::User-->
                                 <div class="topbar-item">
                                     <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
