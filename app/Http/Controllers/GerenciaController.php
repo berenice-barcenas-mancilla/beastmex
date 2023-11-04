@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class GerenciaController extends Controller
 {
     //
-    public function index()
+    public function indexgerencia()
     {
         return view('gerencia/dashboardgerencia');
     }

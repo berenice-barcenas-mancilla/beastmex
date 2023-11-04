@@ -7,9 +7,11 @@
     <title> @yield('titulo') </title>
 
     @vite(['resources/js/app.js']) 
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/gerencia.css') }}">
+
 
 </head>
-<body style="background: #002F2E;">
+<body style="background: #043D3C;">
     
     @include('partials.navbargerencia')
 
