@@ -5,6 +5,7 @@ use App\Http\Controllers\GerenciaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StorageController;
+use App\Http\Controllers\SellerController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsActive;
 use Illuminate\Support\Facades\Auth;
@@ -84,6 +85,9 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     >>>> Seller catalogue
     ***********************************************************************
     */
+    
+    Route::get('/seller', [SellerController::class, 'indexVentas'])->name('ventas.dashboard');
+    Route::get('/seller/products', [SellerController::class, 'productos_list'])->name('ventas.products');
 
     /*
     ***********************************************************************
