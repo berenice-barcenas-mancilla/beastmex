@@ -101,17 +101,17 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     ***********************************************************************
     */
 
-    //list
-    Route::get('/storage', [StorageController::class, 'Dashboard'])->name('storage.dashboard');
+    //List
+    Route::get('/storage', [StorageController::class, 'indexAlmacen'])->name('storage.dashboard');
+  
+    //Read
+    Route::get('/storage/products', [StorageController::class, 'products_list'])->name('storage.productos');
 
-    //Info
-    Route::get('/storage/productos', [StorageController::class, 'MethodViewStorage'])->name('storage.productos');
+    //Save
+    Route::post('/storage/save', [StorageController::class, 'create'])->name('storage.save');
 
-    //Store
-    Route::get('/storage/productos/create', [StorageController::class, 'MethodCreateStorage'])->name('storage.create');
-
-    //Update
-    Route::get('/storage/productos/edit',   [StorageController::class, 'MethodEditStorage'])->name('storage.edit');
+    //Save
+    Route::post('/storage/update', [StorageController::class, 'update'])->name('storage.update');
 
 
     /*
