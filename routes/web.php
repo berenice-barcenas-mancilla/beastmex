@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     Route::get('/gerencia', [GerenciaController::class, 'indexgerencia'])->name('gerencia');
     //list user
     Route::get('/gerencia/generarusuario', [GerenciaController::class, 'generarusuario'])->name('genusuario');
+    //storage
+    Route::post('/gerencia', [GerenciaController::class, 'store'])->name('gerenciaStore');
 
 
         

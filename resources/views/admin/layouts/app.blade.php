@@ -621,14 +621,14 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> --}}
 
     @yield('scripts')
-
+{{-- 
     <script>
         @if (isset($errors) && count($errors) > 0)
             @foreach ($errors->all() as $error)
                 toastr.error("{{ $error }}")
             @endforeach
         @endif
-    </script>
+    </script> --}}
 
 
     @yield('javascript')

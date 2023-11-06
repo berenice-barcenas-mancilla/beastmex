@@ -26,4 +26,22 @@ class GerenciaController extends Controller
         return view('admin.gerencia.generarusuario');
     }
 
+    public function store(Request $request)
+    {
+        
+
+            // Validaciones personalizadas
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'last_name' => 'required|string',
+                'email' => 'required|email',
+                'group' => 'required|string',
+                'password' => 'required|string',
+                'password_confirmation' => 'required|string',
+
+            ]);
+
+        $nombre = $request->input('txtName');
+        return redirect('/gerencia')->with('Exito',  'El usuario ' . $nombre . ' guardado con éxito');
+    }
 }

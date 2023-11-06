@@ -19,10 +19,10 @@
                 </h3>
 		    </div>
 
-            @can('system.users.create')
+            @can('system.management.create')
             <div class="card-toolbar">
                 <!--begin::Button-->
-                <a href="#" class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#userNewModal">
+                <a href="" class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#gerenciaNewModal">
                     <span class="svg-icon svg-icon-md">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -260,7 +260,26 @@
 	    </div>
     </div>
     <!--end::Card-->
-    
+     {{-- manejo de mensajes modulo almacen --}}
+     @if(session()->has('Exito'))
+     <script>
+         Swal.fire({
+             icon: 'success',
+             title: 'Éxito',
+             text: "{{ session('Exito') }}",
+         });
+     </script>
+     @endif
+     
+     @if($errors->any())
+     <script>
+         Swal.fire({
+             icon: 'error',
+             title: 'Error',
+             text: 'No se envió el formulario, por favor verifique los datos',
+         });
+     </script>
+     @endif
 @endsection
 
 
