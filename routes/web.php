@@ -65,10 +65,7 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     ***********************************************************************
     */
     Route::get('/gerencia', [GerenciaController::class, 'index'])->name('gerencia');
-    
-    Route::get('/gerencia/generarusuario', [GerenciaController::class, 'generarusuario'])->name('genusuario');
-
-    
+       
     /*
     ***********************************************************************
     >>>> Profile
