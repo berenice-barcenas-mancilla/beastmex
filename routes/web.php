@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     >>>> Management catalogue
     ***********************************************************************
     */
-    Route::get('/gerencia', [GerenciaController::class, 'indexgerencia'])->name('gerencia');
+    Route::get('/gerencia', [GerenciaController::class, 'index'])->name('gerencia');
     
     Route::get('/gerencia/generarusuario', [GerenciaController::class, 'generarusuario'])->name('genusuario');
 
