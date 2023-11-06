@@ -256,7 +256,7 @@
                             @can('system.store.list')
                                 <li class="menu-item @if ($PAGE_NAVIGATION == 'STORAGE') menu-item-active @endif"
                                     aria-haspopup="true">
-                                    <a href="/storage/products" class="menu-link ">
+                                    <a href="/storage" class="menu-link ">
                                         <span class="svg-icon menu-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
