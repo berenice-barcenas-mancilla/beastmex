@@ -9,6 +9,14 @@
                 </button>
             </div>
  
+             {{-- Mostramos el mensaje con la key --}}
+            @if(session()->has('Exito'))
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+                <strong>{{session('Exito')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <div class="modal-body">
                 <div class="alert alert-custom alert-default" role="alert">
                     <div class="alert-icon">
@@ -38,6 +46,8 @@
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Razon Social *</b> </label>
                         <div class="col-lg-6 col-md-4 col-sm-12">
                             <input type="text" class="form-control" id="name"  name="name" placeholder="Ingresa la razon social de la empresa" value="{{ old('name') }}"/>
+                            <p class="text-warning">{{ $errors->first('name') }}</p>
+
                         </div>
                     </div>
 
@@ -45,6 +55,8 @@
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Email</b> </label>
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <input type="email" class="form-control" id="email"  name="email" placeholder="Ingrese el email" value="{{ old('email') }}"/>
+                            <p class="text-warning">{{ $errors->first('email') }}</p>
+
                         </div>
                     </div>
 
@@ -52,6 +64,8 @@
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Descripción </b> </label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <textarea name="description" id="description" class="form-control" rows="8"> {{ old('description') }}</textarea>
+                            <p class="text-warning">{{ $errors->first('description') }}</p>
+
                         </div>
                     </div>
                 

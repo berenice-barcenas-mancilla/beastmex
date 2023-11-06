@@ -1,22 +1,13 @@
-<!--begin::NewModal-->
-<div class="modal fade" id="supplierEditModal" tabindex="-1" role="dialog" aria-labelledby="supplierEditModal" aria-hidden="true">
+<!--begin::Modal-->
+<div class="modal fade" id="employeeReportSuspendedModal" tabindex="-1" role="dialog" aria-labelledby="employeeReportSuspendedModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar orden de compra</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Bajas de almacen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="la la-remove"></span>
                 </button>
             </div>
-
-            {{-- Mostramos el mensaje con la key --}}
-            @if(session()->has('Exito'))
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                
-                <strong>{{session('Exito')}}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
  
             <div class="modal-body">
                 <div class="alert alert-custom alert-default" role="alert">
@@ -32,50 +23,40 @@
                             </svg><!--end::Svg Icon-->
                         </span>                        
                     </div>
+
                     <div class="alert-text">
                         Los campos marcados con <code>*</code> son obligatorios<br />
                     </div>
                 </div>
             </div>
                
-            <form class="form" method="post" id="editFormSupplier" action="/supplier">
+                                                
+            <form class="form" method="post" id="recordReport" action="/reports/detail" target="_blank">
                 {{ csrf_field() }}
-                @method('PATCH')
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Razon Social *</b> </label>
-                        <div class="col-lg-6 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" id="name"  name="name" placeholder="Ingresa la razon social de la empresa" value="{{ old('name') }}"/>
-                            <p class="text-warning">{{ $errors->first('name') }}</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Email</b> </label>
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Fecha de inicio  *</b> </label>
                         <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="email" class="form-control" id="email"  name="email" placeholder="Ingrese el email" value="{{ old('email') }}"/>
-                            <p class="text-warning">{{ $errors->first('email') }}</p>
-
+                            <input type="date" class="form-control" id="dateInit" required name="dateInit"/>
                         </div>
                     </div>
-
+                    
                     <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Descripción </b> </label>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <textarea name="description" id="description" class="form-control" rows="8"> {{ old('description') }}</textarea>
-                            <p class="text-warning">{{ $errors->first('description') }}</p>
-
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Fecha de corte  *</b> </label>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <input type="date" class="form-control" id="dateEnd" required name="dateEnd"/>
+                            <input hidden type="text" class="form-control" id="type" required name="type" value="EMPLEADOS INACTIVOS"/>
                         </div>
                     </div>
-                
-                </div>  
+                </div> 
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary font-weight-bold">Guardar</button>
+                    <button type="submit" class="btn btn-primary font-weight-bold">Consultar</button>
                 </div>                
             </form>
+            
         </div>
     </div>
 </div>
-<!--end::NewModal-->
+<!--end::EditModal-->

@@ -15,36 +15,35 @@ use App\Http\Requests\StorageRequest;
 class StorageController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    * Create a new controller instance.
+    *
+    * @return void
+    */
     
-     public function __construct()
-     {
-         $this->middleware(function ($request, $next){
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next){
              
-             if (!Gate::allows('system.store.list')) {
-                 abort(403, "No estas autorizado de acceder a esta zona");
-             }
+            if (!Gate::allows('system.store.list')) {
+                abort(403, "No estas autorizado de acceder a esta zona");
+            }
  
-             return $next($request);
-         });
-     }
+            return $next($request);
+        });
+    }
  
      
-     /**
-      * Display a listing of store.
-      *
-      * @return \Illuminate\Http\Response
-      */
-     public function indexAlmacen()
-     {
-         $PAGE_NAVIGATION = "STORE";
-         $roles = Role::where('id', '!=', 1)->orderBy('name')->get(['id', 'name']);
+    /**
+    * Display a listing of store.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function indexAlmacen()
+    {
+        $PAGE_NAVIGATION = "STOREGE";
  
-         return view('admin.Storage.storage_dashboard', compact('PAGE_NAVIGATION', 'roles'));
-     }
+        return view('admin.storage.storage_dashboard', compact('PAGE_NAVIGATION'));
+    }
      
 
      
@@ -56,26 +55,15 @@ class StorageController extends Controller
     public function products_list()
     {
         $PAGE_NAVIGATION = "STORE";
-        $roles = Role::where('id', '!=', 1)->orderBy('name')->get(['id', 'name']);
-        return view('admin.Storage.storage_list', compact('PAGE_NAVIGATION', 'roles'));
+        return view('admin.storage.storage_list', compact('PAGE_NAVIGATION'));
     }
 
-       /**
-     * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-
-
-
-
-
-
-
-
-
-     
+    /**
+    * Store a newly created resource in storage.
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+ 
     public function create(Request $request)
     {
         if (!Gate::allows('system.store.create')) {

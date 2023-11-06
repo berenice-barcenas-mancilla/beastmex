@@ -18,6 +18,15 @@
                 </h3>
 		    </div>
 
+            {{-- Mostramos el mensaje con la key --}}
+            @if(session()->has('Exito'))
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+                <strong>{{session('Exito')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
             @can('system.shop.create')
             <div class="card-toolbar">
                 <!--begin::Button-->
