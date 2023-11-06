@@ -14,7 +14,7 @@
 	    <div class="card-header flex-wrap border-0 pt-6 pb-0">
 		    <div class="card-title">
                 <h3 class="card-label">
-                    Lista de compras
+                    Lista de provedores
                 </h3>
 		    </div>
 
@@ -27,10 +27,10 @@
             </div>
             @endif
 
-            @can('system.shop.create')
+            @can('system.supplier.create')
             <div class="card-toolbar">
                 <!--begin::Button-->
-                <a href="#" class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#shopNewModal">
+                <a href="#" class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#supplierNewModal">
                     <span class="svg-icon svg-icon-md">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -40,7 +40,7 @@
                             </g>
                         </svg><!--end::Svg Icon-->
                     </span>	
-                    Nueva compra
+                    Nuevo proveedor
                 </a>
                 <!--end::Button-->
 		    </div>
@@ -77,7 +77,7 @@
 
 @section('modals')
 
-    @include('admin.forms.shopping.create')
-    @include('admin.forms.shopping.edit')
+    @include('admin.forms.supplier.create')
+    @include('admin.forms.supplier.edit')
 
 @endsection

@@ -63,5 +63,26 @@ class SellerController extends Controller
         return view('admin.ventas.ventas_list', compact('PAGE_NAVIGATION', 'roles'));
     }
 
+       /**
+     * Display a listing of products.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function productos_add()
+    {
+
+        return redirect('/seller/products')->with('confirmacion','Producto agregado con éxito');
+    }
+
+       /**
+     * Display a listing of products.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function venta_add()
+    {
+
+        return redirect('/seller/products')->with('confirmacionVenta','Venta realizada con éxito');
+    }
 
 }

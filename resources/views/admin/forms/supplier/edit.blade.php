@@ -1,22 +1,22 @@
 <!--begin::NewModal-->
-<div class="modal fade" id="shopNewModal" tabindex="-1" role="dialog" aria-labelledby="shopNewModal" aria-hidden="true">
+<div class="modal fade" id="supplierEditModal" tabindex="-1" role="dialog" aria-labelledby="supplierEditModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nueva orden de compra</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar orden de compra</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="la la-remove"></span>
                 </button>
             </div>
 
-             {{-- Mostramos el mensaje con la key --}}
-                @if(session()->has('Exito'))
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    
-                    <strong>{{session('Exito')}}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @endif
+            {{-- Mostramos el mensaje con la key --}}
+            @if(session()->has('Exito'))
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+                <strong>{{session('Exito')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
  
             <div class="modal-body">
                 <div class="alert alert-custom alert-default" role="alert">
@@ -38,39 +38,15 @@
                 </div>
             </div>
                
-            <form class="form" method="post" id="newFormShop" action="/shop">
+            <form class="form" method="post" id="editFormSupplier" action="/supplier">
                 {{ csrf_field() }}
+                @method('PATCH')
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Producto *</b> </label>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <select class="form-control" name="product" id="product" value="{{ old('product') }}>
-                                <option value="P1">Producto 1</option>
-                                <option value="P2">Producto 2</option>
-                            </select>
-                            <p class="text-warning">{{ $errors->first('product') }}</p>
-
-                        </div>
-                    </div>
-                
-                    <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Empresa *</b> </label>
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Razon Social *</b> </label>
                         <div class="col-lg-6 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" id="name"  name="name" placeholder="Ingresa el nombre de la empresa" value="{{ old('name') }}"/>
+                            <input type="text" class="form-control" id="name"  name="name" placeholder="Ingresa la razon social de la empresa" value="{{ old('name') }}"/>
                             <p class="text-warning">{{ $errors->first('name') }}</p>
-                        </div>
-                    </div>
-
-                
-                    <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Proveedor *</b> </label>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <select class="form-control" name="supplier" id="supplier" value="{{ old('supplier') }}>
-                                <option value="E1">Ejemplo 1</option>
-                                <option value="E2">Ejemplo 2</option>
-                            </select>
-                            <p class="text-warning">{{ $errors->first('supplier') }}</p>
-
                         </div>
                     </div>
 
@@ -82,8 +58,17 @@
 
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Descripción </b> </label>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <textarea name="description" id="description" class="form-control" rows="8"> {{ old('description') }}</textarea>
+                            <p class="text-warning">{{ $errors->first('description') }}</p>
+
+                        </div>
+                    </div>
                 
-                </div> 
+                </div>  
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Cerrar</button>

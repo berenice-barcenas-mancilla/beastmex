@@ -4,8 +4,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GerenciaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsActive;
 use Illuminate\Support\Facades\Auth;
@@ -26,12 +29,12 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     >>>> Dashboard 
     ***********************************************************************
     */
-   
+    
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 
-    
-    
+        
+        
     /*
     ***********************************************************************
     >>>> Groups
@@ -64,8 +67,13 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     >>>> Management catalogue
     ***********************************************************************
     */
-    Route::get('/gerencia', [GerenciaController::class, 'index'])->name('gerencia');
-       
+    //list
+    Route::get('/gerencia', [GerenciaController::class, 'indexgerencia'])->name('gerencia');
+    //list user
+    Route::get('/gerencia/generarusuario', [GerenciaController::class, 'generarusuario'])->name('genusuario');
+
+
+        
     /*
     ***********************************************************************
     >>>> Profile
@@ -75,6 +83,20 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
+    
+    /*
+    ***********************************************************************
+    >>>> Reports
+    ***********************************************************************
+    */
+    
+    // List
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+  
+    // Index detail reports
+    Route::post('/reports/detail', [ReportController::class, 'indexDetail'])->name('indexReportDetail');
+
+   
 
 
     /*
@@ -82,9 +104,11 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     >>>> Seller catalogue
     ***********************************************************************
     */
-    
+        
     Route::get('/seller', [SellerController::class, 'indexVentas'])->name('ventas.dashboard');
     Route::get('/seller/products', [SellerController::class, 'productos_list'])->name('ventas.products');
+    Route::post('/seller/add',[SellerController::class,'productos_add'])->name('ventas.add');
+    Route::post('/seller/venta',[SellerController::class,'venta_add'])->name('ventas.venta');
 
     /*
     ***********************************************************************
@@ -92,23 +116,87 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     ***********************************************************************
     */
 
+    // List
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+    
+    // List JSON
+    Route::get('/shop/list-shop', [ShopController::class, 'getShop'])->name('shopList');
+
+    // Info
+    Route::get('/shop/{shop}', [ShopController::class, 'getInfo'])->name('infoShop');
+
+    // Update
+    Route::patch('/shop-update/{shop}', [ShopController::class, 'update'])->name('updateShop');
+
+    //Store
+    Route::post('/shop', [ShopController::class, 'store'])->name('shopStore');
+        
+    //Suspended
+    Route::post('/shop-inactive/{shop}', [ShopController::class, 'inactive'])->name('shopInactived');
+
+    //Actived
+    Route::post('/shop-active/{shop}', [ShopController::class, 'active'])->name('shopActived');
+
+    
+    /*
+    ***********************************************************************
+    >>>> Supplier catalogue
+    ***********************************************************************
+    */
+
+    // List
+    Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
+    
+    // List JSON
+    Route::get('/supplier/list-supplier', [SupplierController::class, 'getSupplier'])->name('supplierList');
+
+    // Info
+    Route::get('/supplier/{supplier}', [SupplierController::class, 'getInfo'])->name('infoSupplier');
+
+    // Update
+    Route::patch('/supplier-update/{supplier}', [SupplierController::class, 'update'])->name('updateSupplier');
+
+    //Store
+    Route::post('/supplier', [SupplierController::class, 'store'])->name('storeSupplier');
+        
+    //Suspended
+    Route::post('/supplier-inactive/{supplier}', [SupplierController::class, 'inactive'])->name('supplierInactived');
+
+    //Actived
+    Route::post('/shop-active/{supplier}', [SupplierController::class, 'active'])->name('supplierActived');
+
+        
+
     /*
     ***********************************************************************
     >>>> Storage catalogue
     ***********************************************************************
     */
 
-    //list
-    Route::get('/storage', [StorageController::class, 'Dashboard'])->name('storage.dashboard');
+  
+    //List
+    Route::get('/storage', [StorageController::class, 'indexAlmacen'])->name('storage.dashboard');
+  
+    //Read
+    Route::get('/storage/products', [StorageController::class, 'products_list'])->name('storage.productos');
 
-    //Info
-    Route::get('/storage/productos', [StorageController::class, 'MethodViewStorage'])->name('storage.productos');
+    //Save
+    Route::post('/storage/save', [StorageController::class, 'create'])->name('storage.save');
+
+    //Save
+    Route::post('/storage/update', [StorageController::class, 'update'])->name('storage.update');
 
     //Store
     Route::get('/storage/productos/create', [StorageController::class, 'MethodCreateStorage'])->name('storage.create');
 
     //Update
     Route::get('/storage/productos/edit',   [StorageController::class, 'MethodEditStorage'])->name('storage.edit');
+
+    //Actived
+    Route::post('/storage-active/{storage}', [StorageController::class, 'active'])->name('storageActived');
+
+    //Suspended
+    Route::post('/storage-inactive/{storage}', [StorageController::class, 'inactive'])->name('storageInactived');
 
 
     /*
@@ -142,6 +230,3 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
 
 });
 require __DIR__.'/auth.php';
-
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
