@@ -254,44 +254,8 @@
 
 @section('modals')
 
-    @include('admin.forms.StorageModule.create')
-    @include('admin.forms.StorageModule.edit')
+    @include('admin.forms.storage.create')
+    @include('admin.forms.storage.edit')
 
 @endsection
 
-
-@section('scripts')
-    <script>
-        var HOST_URL = "{{ env('APP_HOST', 'http://127.0.0.1:8000') }}";
-        var editUser = false;
-        var statusUser = false;
-
-        @can('system.store.edit')
-            editUser = true;
-        @endcan
-
-        @can('system.store.status')
-            statusUser = true;
-        @endcan
-        
-    </script>
-
-    <!--begin::Page Scripts(used by this page)-->
-    <script src="js/admin/users.js?v=1.0.1"></script>
-    <!--end::Page Scripts-->
-
-
-    <script>
-        @if (Session::has('status'))
-
-            toastr.success("{{ Session::get('status') }}");
-        @endif
-
-
-        @if (Session::has('errorsDB'))
-
-            toastr.error("{{ Session::get('errorsDB') }}");
-        @endif
-        
-    </script>
-@endsection

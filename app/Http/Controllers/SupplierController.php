@@ -46,7 +46,19 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // if (!Gate::allows('system.supplier.create')) {
+        //     abort(403, "No estas autorizado para registrar información");
+        // }
+
+            // Validaciones personalizadas
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email',
+                'description' => 'required|string',
+            ]);
+
+        $nombre = $request->input('txtName');
+        return redirect('/supplier')->with('Exito',  'Proveedor  ' . $nombre . ' guardado con éxito');
     }
 
     /**

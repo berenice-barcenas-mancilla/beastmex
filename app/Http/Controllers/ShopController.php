@@ -53,7 +53,20 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // if (!Gate::allows('system.shop.create')) {
+        //     abort(403, "No estas autorizado para registrar información");
+        // }
+
+            // Validaciones personalizadas
+            $validatedData = $request->validate([
+                'product' => 'required|string',
+                'name' => 'required|string',
+                'supplier' => 'required|string',
+                'email' => 'required|email',
+            ]);
+
+        $nombre = $request->input('txtName');
+        return redirect('/shop')->with('Exito',  'La orden de compra ' . $nombre . ' guardado con éxito');
     }
 
     /**
