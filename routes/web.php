@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
   //list user
   Route::get('/gerencia/generarusuario', [GerenciaController::class, 'generarusuario'])->name('genusuario');
 
+
     
   /*
   ***********************************************************************
@@ -169,6 +170,18 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
 
   //Suspended
   Route::post('/storage-inactive/{storage}', [StorageController::class, 'inactive'])->name('storageInactived');
+
+    //List
+    Route::get('/storage', [StorageController::class, 'indexAlmacen'])->name('storage.dashboard');
+  
+    //Read
+    Route::get('/storage/products', [StorageController::class, 'products_list'])->name('storage.productos');
+
+    //Save
+    Route::post('/storage/save', [StorageController::class, 'create'])->name('storage.save');
+
+    //Save
+    Route::post('/storage/update', [StorageController::class, 'update'])->name('storage.update');
 
   //Actived
   Route::post('/storage-active/{storage}', [StorageController::class, 'active'])->name('storageActived');
