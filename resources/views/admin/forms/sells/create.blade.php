@@ -29,7 +29,7 @@
                 </div>
             </div>
                                                 
-            <form class="form" method="post" id="newFormUser" action="/users">
+            <form class="form" method="post" id="newFormVentas" action="/seller/venta">
                 {{ csrf_field() }}
                 <div class="modal-body">
                     <div class="form-group row">
@@ -60,9 +60,9 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <td>Soy</td>
+                                    <td>El</td>
+                                    <td>Ticket</td>
                                 </tr>                      
                             </tbody>
                         </table>
@@ -72,7 +72,7 @@
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Total *</b> </label>
                         <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" required name="total"/>
+                            <input type="text" class="form-control" required readonly name="total" placeholder="1,900.00"> 
                         </div>
                     </div>
                     
