@@ -260,52 +260,14 @@
 	    </div>
     </div>
     <!--end::Card-->
-
-
-    
     
 @endsection
 
-
-@section('scripts')
-    <script>
-        var HOST_URL = "{{ env('APP_HOST', 'http://127.0.0.1:8000') }}";
-        var editUser = false;
-        var statusUser = false;
-
-        @can('system.users.edit')
-            editUser = true;
-        @endcan
-
-        @can('system.users.status')
-            statusUser = true;
-        @endcan
-        
-    </script>
-
-    <!--begin::Page Scripts(used by this page)-->
-    <script src="js/admin/users.js?v=1.0.1"></script>
-    <!--end::Page Scripts-->
-
-
-    <script>
-        @if (Session::has('status'))
-
-            toastr.success("{{ Session::get('status') }}");
-        @endif
-
-
-        @if (Session::has('errorsDB'))
-
-            toastr.error("{{ Session::get('errorsDB') }}");
-        @endif
-        
-    </script>
-@endsection
 
 @section('modals')
 
-    @include('admin.forms.users.create')
-    @include('admin.forms.users.edit')
+    @include('admin.forms.management.create')
+    @include('admin.forms.management.edit')
 
 @endsection
+

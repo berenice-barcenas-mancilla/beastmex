@@ -155,7 +155,7 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     Route::patch('/supplier-update/{supplier}', [SupplierController::class, 'update'])->name('updateSupplier');
 
     //Store
-    Route::post('/supplier', [SupplierController::class, 'supplier'])->name('shopSupplier');
+    Route::post('/supplier', [SupplierController::class, 'store'])->name('storeSupplier');
         
     //Suspended
     Route::post('/supplier-inactive/{supplier}', [SupplierController::class, 'inactive'])->name('supplierInactived');

@@ -224,7 +224,7 @@
 
 @media (max-width: 991.98px) {
   .header-menu-mobile {
-    background-color: #002F2E ; }
+    background-color: #ffffff ; }
     .header-menu-mobile .menu-nav > .menu-item > .menu-heading .menu-text,
     .header-menu-mobile .menu-nav > .menu-item > .menu-link .menu-text {
       color: #3F4254 ; }
@@ -254,7 +254,7 @@
       transition: background-color 0.3s; }
       .header-menu-mobile .menu-nav > .menu-item.menu-item-open > .menu-heading,
       .header-menu-mobile .menu-nav > .menu-item.menu-item-open > .menu-link {
-        background-color: #002F2E ; }
+        background-color: #F3F6F9 ; }
         .header-menu-mobile .menu-nav > .menu-item.menu-item-open > .menu-heading .menu-text,
         .header-menu-mobile .menu-nav > .menu-item.menu-item-open > .menu-link .menu-text {
           color: #3699FF ; }
