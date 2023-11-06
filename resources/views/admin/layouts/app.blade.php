@@ -256,7 +256,7 @@
                             @can('system.store.list')
                                 <li class="menu-item @if ($PAGE_NAVIGATION == 'STORAGE') menu-item-active @endif"
                                     aria-haspopup="true">
-                                    <a href="/storage/products" class="menu-link ">
+                                    <a href="/storage" class="menu-link ">
                                         <span class="svg-icon menu-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -431,19 +431,17 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <!--begin::Header-->
-                <div id="kt_header" class="header  header-fixed ">
+                <div id="kt_header" class="header  header-fixed " >
                     <!--begin::Container-->
                     <div class=" container-fluid  d-flex align-items-stretch justify-content-between">
                         <!--begin::Header Menu Wrapper-->
                         <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
                             <!--begin::Header Menu-->
-                            <div id="kt_header_menu"
-                                class="header-menu header-menu-mobile  header-menu-layout-default ">
+                            <div id="kt_header_menu" class="header-menu header-menu-mobile  header-menu-layout-default " >
                                 <!--begin::Header Nav-->
                                 <ul class="menu-nav ">
-                                    <li class="menu-item  menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here menu-item-active"
-                                        data-menu-toggle="click" aria-haspopup="true">
-                                        <a href="/dashboard" class="menu-link">
+                                    <li class="menu-item  menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here menu-item-active"  data-menu-toggle="click" aria-haspopup="true">
+                                        <a  href="/dashboard" class="menu-link">
                                             <span class="menu-text"> PANEL ADMINISTRATIVO</span>
                                             <i class="menu-arrow"></i>
                                         </a>
@@ -457,22 +455,18 @@
 
                         <!--begin::Topbar-->
                         <div class="topbar">
-
+                            
                             <!--begin::User-->
                             <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Bienvenido(a)</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->name }}</span>
+                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Bienvenido(a)</span>
+                                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->name }}</span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                                        <span
-                                            class="symbol-label font-size-h5 font-weight-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                                        <span class="symbol-label font-size-h5 font-weight-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
                                     </span>
                                 </div>
                             </div>
-                            <!--end::User-->
+                            <!--end::User-->                                
                         </div>
                         <!--end::Topbar-->
                     </div>
@@ -480,12 +474,11 @@
                 </div>
                 <!--end::Header-->
 
-                <!--begin::Content-->
-                <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+                 <!--begin::Content-->
+                 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
                     <!--begin::Subheader-->
                     <div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
-                        <div
-                            class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                        <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                             <!--begin::Info-->
                             <div class="d-flex align-items-center flex-wrap mr-2">
                                 <!--begin::Page Title-->
@@ -493,12 +486,11 @@
                                 <!--end::Page Title-->
 
                                 <!--begin::Actions-->
-                                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200">
-                                </div>
+                                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
                                 @yield('breadcrumb')
                                 <!--end::Actions-->
                             </div>
-                            <!--end::Info-->
+                            <!--end::Info-->                                        
                         </div>
                     </div>
                     <!--end::Subheader-->
@@ -507,7 +499,7 @@
                     <div class="d-flex flex-column-fluid">
                         <!--begin::Container-->
                         <div class=" container ">
-                            @yield('content')
+                            @yield('content')                                
                         </div>
                         <!--end::Container-->
                     </div>
@@ -626,7 +618,7 @@
     <!--end::Page Scripts-->
 
     <!-- Toastr -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> --}}
 
     @yield('scripts')
 
