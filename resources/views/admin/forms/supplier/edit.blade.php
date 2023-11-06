@@ -1,9 +1,9 @@
 <!--begin::NewModal-->
-<div class="modal fade" id="shopNewModal" tabindex="-1" role="dialog" aria-labelledby="shopNewModal" aria-hidden="true">
+<div class="modal fade" id="supplierEditModal" tabindex="-1" role="dialog" aria-labelledby="supplierEditModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nueva orden de compra</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar orden de compra</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="la la-remove"></span>
                 </button>
@@ -29,34 +29,14 @@
                 </div>
             </div>
                
-            <form class="form" method="post" id="newFormShop" action="/shop">
+            <form class="form" method="post" id="editFormSupplier" action="/supplier">
                 {{ csrf_field() }}
+                @method('PATCH')
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Producto *</b> </label>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <select class="form-control" name="renewal" id="renewal" >
-                                <option value="No">Producto 1</option>
-                                <option value="Yes">Producto 2</option>
-                            </select>
-                        </div>
-                    </div>
-                
-                    <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Empresa *</b> </label>
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Razon Social *</b> </label>
                         <div class="col-lg-6 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" id="name"  name="name" placeholder="Ingresa el nombre de la empresa" value="{{ old('name') }}"/>
-                        </div>
-                    </div>
-
-                
-                    <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Proveedor *</b> </label>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <select class="form-control" name="renewal" id="renewal" >
-                                <option value="No">Ejemplo 1</option>
-                                <option value="Yes">Ejemplo 2</option>
-                            </select>
+                            <input type="text" class="form-control" id="name"  name="name" placeholder="Ingresa la razon social de la empresa" value="{{ old('name') }}"/>
                         </div>
                     </div>
 
@@ -66,8 +46,15 @@
                             <input type="email" class="form-control" id="email"  name="email" placeholder="Ingrese el email" value="{{ old('email') }}"/>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Descripción </b> </label>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <textarea name="description" id="description" class="form-control" rows="8"> {{ old('description') }}</textarea>
+                        </div>
+                    </div>
                 
-                </div> 
+                </div>  
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Cerrar</button>

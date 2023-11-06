@@ -52,6 +52,11 @@ class RoleSeeder extends Seeder
             ['group' => 'Compras',                          'name' => "system.shop.edit",                       'description' => "Permiso para editar la información de las compras",                       'permisos' => collect(['all'])],
             ['group' => 'Compras',                          'name' => "system.shop.status",                     'description' => "Permiso para activar/suspender compras",                                  'permisos' => collect(['all'])],
 
+            ['group' => 'Compras',                          'name' => "system.supplier.list",                   'description' => "Permiso para acceder al listado de proveedores",                          'permisos' => collect(['all'])],
+            ['group' => 'Compras',                          'name' => "system.supplier.create",                 'description' => "Permiso para registrar nuevas proveedores",                               'permisos' => collect(['all'])],
+            ['group' => 'Compras',                          'name' => "system.supplier.edit",                   'description' => "Permiso para editar la información de las proveedores",                   'permisos' => collect(['all'])],
+            ['group' => 'Compras',                          'name' => "system.supplier.status",                 'description' => "Permiso para activar/suspender proveedores",                              'permisos' => collect(['all'])],
+
            ]);
 
 
