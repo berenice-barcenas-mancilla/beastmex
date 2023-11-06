@@ -92,11 +92,11 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     
     // List
     Route::get('/reports', [ReportController::class, 'index'])->name('reports');
-
+  
     // Index detail reports
     Route::post('/reports/detail', [ReportController::class, 'indexDetail'])->name('indexReportDetail');
 
-    /*
+   
 
 
     /*
@@ -107,6 +107,8 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
         
     Route::get('/seller', [SellerController::class, 'indexVentas'])->name('ventas.dashboard');
     Route::get('/seller/products', [SellerController::class, 'productos_list'])->name('ventas.products');
+    Route::post('/seller/add',[SellerController::class,'productos_add'])->name('ventas.add');
+    Route::post('/seller/venta',[SellerController::class,'venta_add'])->name('ventas.venta');
 
     /*
     ***********************************************************************

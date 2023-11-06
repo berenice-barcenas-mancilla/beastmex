@@ -8,6 +8,15 @@
 
 {{-- Apartir de esta sección se comienza a estructurar el contenido de este modulo de ventas --}}
 @section('content')
+@if(session()->has('confirmacionVenta'))
+    <script>
+    Swal.fire({
+    title: "Success",
+    text: "{{session('confirmacionVenta')}}",
+    icon: "success"
+    });
+    </script>
+    @endif
 
     <!--begin::Card-->      
     <div class="card card-custom">
@@ -77,7 +86,8 @@
 	    </div>
     </div>
     <!--end::Card-->
-
+    <form action="/seller/add" method="post">
+    @csrf
     <!-- Start table -->
     <div class="mt-5">
         <table class="table table-hover ">
@@ -99,7 +109,7 @@
                     <td>@mdo</td>
                     <td>Otto</td>
                     <td>
-                        <a href="" >
+                        <a type="submit" class="btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"/>
                         </svg>
@@ -112,7 +122,7 @@
                     <td>@fat</td>
                     <td>Otto</td>
                     <td>
-                        <a href="" >
+                        <a type="submit" class="btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"/>
                         </svg>
@@ -125,7 +135,7 @@
                     <td>@twitter</td>
                     <td>Otto</td>
                     <td>
-                        <a href="" >
+                        <a type="submit" class="btn" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"/>
                         </svg>
@@ -134,9 +144,23 @@
                 </tr>
             </tbody>
         </table>
+
+        </form>
+    @if(session()->has('confirmacion'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong> {{session('confirmacion')}} </strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    @endif
+
+    </div>
+    
     <!-- end table -->
+    
+    
 @endsection
+
+
 
 @section('modals')
 
@@ -145,38 +169,4 @@
 @endsection
 
 
-@section('scripts')
-    <script>
-        var HOST_URL = "{{ env('APP_HOST', 'http://127.0.0.1:8000') }}";
-        var editUser = false;
-        var statusUser = false;
 
-        @can('system.users.edit')
-            editUser = true;
-        @endcan
-
-        @can('system.users.status')
-            statusUser = true;
-        @endcan
-        
-    </script>
-
-    <!--begin::Page Scripts(used by this page)-->
-    <script src="js/admin/users.js?v=1.0.1"></script>
-    <!--end::Page Scripts-->
-
-
-    <script>
-        @if (Session::has('status'))
-
-            toastr.success("{{ Session::get('status') }}");
-        @endif
-
-
-        @if (Session::has('errorsDB'))
-
-            toastr.error("{{ Session::get('errorsDB') }}");
-        @endif
-        
-    </script>
-@endsection
