@@ -26,6 +26,11 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
+            <!-- Agrega los enlaces a SweetAlert2 CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+
+
         <!-- Se agrega el CSRF TOKEN para la identificación del usuario, da seguridad de que solo si se esta logeado mostrara la información-->
         <meta name="csrf-token" content="{{ csrf_token() }}"/>
         {{-- Se importan los estilos --}}
