@@ -4,7 +4,7 @@
 {{-- Se le da el nombre a la sección según el sitio que se esté consultando --}}
 @section('breadcrumb')
     <span class="font-weight-bold mr-4">Listado de productos</span>
-    <a href="/storage/products" class="btn btn-primary">
+    <a href="/products" class="btn btn-primary">
         <img src="{{ asset('images/Products.png') }}" alt="Editar" width="25">
         Productos
     </a> 

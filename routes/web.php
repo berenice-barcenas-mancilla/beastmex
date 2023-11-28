@@ -5,9 +5,9 @@ use App\Http\Controllers\GerenciaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsActive;
@@ -165,7 +165,7 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     Route::post('/supplier-inactive/{supplier}', [SupplierController::class, 'inactive'])->name('supplierInactived');
 
     //Actived
-    Route::post('/shop-active/{supplier}', [SupplierController::class, 'active'])->name('supplierActived');
+    Route::post('/supplier-active/{supplier}', [SupplierController::class, 'active'])->name('supplierActived');
 
         
 
@@ -175,30 +175,32 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     ***********************************************************************
     */
 
-  
-    //List
-    Route::get('/storage', [StorageController::class, 'indexAlmacen'])->name('storage.dashboard');
-  
-    //Read
-    Route::get('/storage/products', [StorageController::class, 'products_list'])->name('storage.productos');
+    // List
+    Route::get('/store', [StoreController::class, 'index'])->name('store');
 
-    //Save
-    Route::post('/storage/save', [StorageController::class, 'create'])->name('storage.save');
+    //list products
+    Route::get('/products', [StoreController::class, 'index_products'])->name('store');
 
-    //Save
-    Route::post('/storage/update', [StorageController::class, 'update'])->name('storage.update');
+    
+    // List JSON
+    Route::get('/store/list-store', [StoreController::class, 'getStore'])->name('storeList');
+
+    // Info
+    Route::get('/store/{store}', [StoreController::class, 'getInfo'])->name('infoStore');
+
+    // Update
+    Route::patch('/store-update/{store}', [StoreController::class, 'update'])->name('updateStore');
 
     //Store
-    Route::get('/storage/productos/create', [StorageController::class, 'MethodCreateStorage'])->name('storage.create');
-
-    //Update
-    Route::get('/storage/productos/edit',   [StorageController::class, 'MethodEditStorage'])->name('storage.edit');
+    Route::post('/store', [StoreController::class, 'store'])->name('storeStore');
+        
+    //Suspended
+    Route::post('/store-inactive/{store}', [StoreController::class, 'inactive'])->name('storeInactived');
 
     //Actived
-    Route::post('/storage-active/{storage}', [StorageController::class, 'active'])->name('storageActived');
+    Route::post('/store-active/{store}', [StoreController::class, 'active'])->name('storeActived');
 
-    //Suspended
-    Route::post('/storage-inactive/{storage}', [StorageController::class, 'inactive'])->name('storageInactived');
+
 
 
     /*
