@@ -10,7 +10,7 @@ export default defineConfig({
                 'resources/js/app.js',
             ],
             refresh: true,
-            // Importamos Bootstrap 5
+// Importamos Bootstrap 5
             resolve:{
                 alias:{
                     '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),

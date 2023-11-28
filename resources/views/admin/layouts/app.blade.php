@@ -254,9 +254,9 @@
                             {{-- Con "can" se fitra si el usuario logeado segun su rol tiene o no permiso de acceder a ese modulo 
                                             Si se tiene permiso se muestra la opción --}}
                             @can('system.store.list')
-                                <li class="menu-item @if ($PAGE_NAVIGATION == 'STORAGE') menu-item-active @endif"
+                                <li class="menu-item @if ($PAGE_NAVIGATION == 'STORE') menu-item-active @endif"
                                     aria-haspopup="true">
-                                    <a href="/storage" class="menu-link ">
+                                    <a href="/store" class="menu-link ">
                                         <span class="svg-icon menu-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
