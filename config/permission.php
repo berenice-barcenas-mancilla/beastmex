@@ -103,14 +103,7 @@ return [
 
     'register_permission_check_method' => true,
 
-    /*
-     * When set to true, the Spatie\Permission\Listeners\OctaneReloadPermissions listener will be registered
-     * on the Laravel\Octane\Events\OperationTerminated event, this will refresh permissions on every
-     * TickTerminated, TaskTerminated and RequestTerminated
-     * NOTE: This should not be needed in most cases, but an Octane/Vapor combination benefited from it.
-     */
-    'register_octane_reset_listener' => false,
-
+   
     /*
      * Teams Feature.
      * When set to true the package implements teams using the 'team_foreign_key'.
@@ -123,13 +116,7 @@ return [
 
     'teams' => false,
 
-    /*
-     * Passport Client Credentials Grant
-     * When set to true the package will use Passports Client to check permissions
-     */
-
-    'use_passport_client_credentials' => false,
-
+   
     /*
      * When set to true, the required permission names are added to exception messages.
      * This could be considered an information leak in some contexts, so the default
@@ -152,14 +139,6 @@ return [
      */
 
     'enable_wildcard_permission' => false,
-
-    /*
-     * The class to use for interpreting wildcard permissions.
-     * If you need to modify delimiters, override the class and specify its name here.
-     */
-    // 'permission.wildcard_permission' => Spatie\Permission\WildcardPermission::class,
-
-    /* Cache-specific settings */
 
     'cache' => [
 

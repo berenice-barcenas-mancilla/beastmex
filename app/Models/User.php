@@ -6,13 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-
+use Haruncpi\LaravelUserActivity\Traits\Loggable;
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +25,12 @@ class User extends Authenticatable
         'email',
         'status',
         'password',
+        'type'
     ];
+
+    // ***************************************************
+    // METHOD
+    // ***************************************************
 
     /**
      * The attributes that should be hidden for serialization.
@@ -37,6 +42,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
+
+
     /**
      * The attributes that should be cast.
      *
@@ -44,49 +52,76 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
 
+
+
+
     /**
-     * Mutator: Convierte el nombre en formato "Title Case" (inicial de cada palabra en mayúscula).
+     * Mutators
      *
      * @var array<string, string>
      */
-    protected function name(): Attribute
+    protected function name():Attribute 
     {
         return new Attribute(
-            set: function ($value) {
-                return ucwords(strtolower($value));
+            set: function($value){
+                return ucwords( strtolower($value) );
             }
         );
     }
 
+
+
+
     /**
-     * Mutator: Convierte el apellido en formato "Title Case" (inicial de cada palabra en mayúscula).
+     * Mutators
      *
      * @var array<string, string>
      */
-    protected function lastName(): Attribute
+    protected function lastName():Attribute 
     {
         return new Attribute(
-            set: function ($value) {
-                return ucwords(strtolower($value));
+            set: function($value){
+                return ucwords( strtolower($value) );
             }
         );
     }
 
+
+
+
     /**
-     * Mutator: Convierte el correo electrónico a minúsculas.
+     * Mutators
      *
      * @var array<string, string>
      */
-    protected function email(): Attribute
+    protected function email():Attribute 
     {
         return new Attribute(
-            set: function ($value) {
+            set: function($value){
                 return strtolower($value);
             }
         );
     }
+
+
+
+
+    // ***************************************************
+    // Relationship
+    // ***************************************************
+
+
+
+    /**
+     * Usuario asociado a tiempo extra
+     **/
+    public function extratimes()
+{
+    return $this->hasMany(Extratime::class, 'user_id');
+}
+
+
 
 }
