@@ -35,21 +35,21 @@
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Nombre *</b> </label>
                         <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" id="name" required name="name" placeholder="Ingresa el nombre"/>
+                            <input type="text" class="form-control" id="name" required name="name" placeholder="Ingresa el nombre" value="{{ old('name') }}"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Apellido *</b> </label>
                         <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" id="lastName" required name="last_name" placeholder="Ingresa el apellido"/>
+                            <input type="text" class="form-control" id="lastName" required name="last_name" placeholder="Ingresa el apellido" value="{{ old('last_name') }}"/>
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Correo *</b> </label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input type="email" class="form-control" id="email" required name="email" placeholder="Ingresa el correo"/>
+                            <input type="email" class="form-control" id="email" required name="email" placeholder="Ingresa el correo" value="{{ old('email') }}"/>
                         </div>
                     </div>
                     

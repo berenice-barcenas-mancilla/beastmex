@@ -36,7 +36,7 @@
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Nombre *</b> </label>
                         <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" id="name" required name="name" placeholder="Ingresa el nombre"/>
+                            <input type="text" class="form-control" id="name" required name="name" placeholder="Ingresa el nombre" value="{{ old('name') }}"/>
                         </div>
                     </div>
                     

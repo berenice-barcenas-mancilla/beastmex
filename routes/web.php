@@ -1,23 +1,35 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GroupController;
+use App\Http\Middleware\IsActive;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\UserController;
-use App\Http\Middleware\IsActive;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 /*
 ***********************************************************************
 >>>> Rutas para acceder dentro del sistema
@@ -30,7 +42,8 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     ***********************************************************************
     */
     
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    //Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['auth', IsActive::class])->name('dashboard');
 
 
         
