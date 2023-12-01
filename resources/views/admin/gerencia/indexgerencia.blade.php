@@ -46,6 +46,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-9 col-xl-8">
                         <div class="row align-items-center">
+
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
                                     <input type="text" class="form-control" placeholder="Buscar..." id="kt_datatable_search_query" />
@@ -63,6 +64,20 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-4 my-2 my-md-0">
+                                <div class="d-flex align-items-center">
+                                    <button class="btn btn-primary font-weight-bolder">
+                                        <span class="svg-icon svg-icon-md">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+                                            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+                                            </svg><!--end::Svg Icon-->
+                                        </span>
+                                        Buscar
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>                        
                     </div>
                 </div>
