@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\GerenciaController;
+use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ReportController;
@@ -68,13 +68,8 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     ***********************************************************************
     */
     //list
-    Route::get('/gerencia', [GerenciaController::class, 'indexgerencia'])->name('gerencia');
+    Route::get('/gerencia', [ManagementController::class, 'index'])->name('gerencia.index');
     //list user
-    Route::get('/gerencia/generarusuario', [GerenciaController::class, 'generarusuario'])->name('genusuario');
-    //storage
-    Route::post('/gerencia', [GerenciaController::class, 'store'])->name('gerenciaStore');
-
-
         
     /*
     ***********************************************************************
