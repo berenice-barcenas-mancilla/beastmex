@@ -61,7 +61,7 @@ class GroupController extends Controller
  
          $roles = Role::where('id', '!=', 1)->orderBy('name')->get(['id', 'name']);
          
-         return response()->json(['data'  => $roles]);
+        return response()->json(['data'  => $roles]);
      }
  
      
