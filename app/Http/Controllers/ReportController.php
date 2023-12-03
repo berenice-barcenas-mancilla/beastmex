@@ -109,9 +109,13 @@ class ReportController extends Controller
     {
         $pdf = App::make('dompdf.wrapper');
 
-        $allProducts = Store::all();
+        $fechaini = $request->input('dateInit');
 
-        $pdf->loadHTML('<h1>Test</h1>');
+        $fechafin = $request->input('dateEnd');
+
+        $allProducts = Store::whereBetween('fechaIngreso', [$fechaini, $fechafin])->get();
+
+        $pdf->loadView('admin.reports.pdf.reportealmacen', compact('allProducts','fechaini','fechafin'));
 
         return $pdf->stream();
     }

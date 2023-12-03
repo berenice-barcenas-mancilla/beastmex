@@ -59,8 +59,8 @@ class StoreController extends Controller
                 'txtPurchaseCost' => 'required|numeric',
                 
             ]);
-            $imageName = time() . '.' . $request->txtPhoto->extension();
-            $request->txtPhoto->move(public_path('images'), $imageName);
+            // $imageName = time() . '.' . $request->txtPhoto->extension();
+            // $request->txtPhoto->move(public_path('images'), $imageName);
 
 
 
@@ -72,7 +72,7 @@ class StoreController extends Controller
         $addProducto->costoCompra = $request->input('txtPurchaseCost');
         $addProducto->precioVenta = $request->input('txtPurchaseCost') + ($request->input('txtPurchaseCost') * 0.55);
         $addProducto->fechaIngreso = $request->input('txtEntryDate');       
-        $addProducto->foto = $imageName;
+        $addProducto->foto = 'foto';
         $addProducto->estatus = $request->input('status');
         $addProducto->save();
         return redirect('/store')->with('Exito',  'El producto ' . $addProducto->nombre . ' se ha registrado con éxito');
