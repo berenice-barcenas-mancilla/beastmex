@@ -124,7 +124,7 @@
                                         </g>
                                     </svg><!--end::Svg Icon--></span>
                                     <br>
-                                    <a href="/storage/products" class="text-danger font-weight-bold font-size-h6 mt-2">
+                                    <a href="/products" class="text-danger font-weight-bold font-size-h6 mt-2">
                                         Almacen
                                     </a>
                                 </div>

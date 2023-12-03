@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar orden de compra</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar proveedor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="la la-remove"></span>
                 </button>
@@ -38,31 +38,23 @@
                 </div>
             </div>
                
-            <form class="form" method="post" id="editFormSupplier" action="/supplier">
+            <form class="form" method="post" id="editFormSupplier" action="#">
                 {{ csrf_field() }}
                 @method('PATCH')
                 <div class="modal-body">
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Razon Social *</b> </label>
                         <div class="col-lg-6 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" id="name"  name="name" placeholder="Ingresa la razon social de la empresa" value="{{ old('name') }}"/>
-                            <p class="text-warning">{{ $errors->first('name') }}</p>
+                            <input type="text" class="form-control" id="supplierEdit"  name="supplier" placeholder="Ingresa la razon social de la empresa" value="{{ old('supplier') }}"/>
+                            <p class="text-warning">{{ $errors->first('supplier') }}</p>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Email</b> </label>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="email" class="form-control" id="email"  name="email" placeholder="Ingrese el email" value="{{ old('email') }}"/>
-                            <p class="text-warning">{{ $errors->first('email') }}</p>
-
-                        </div>
-                    </div>
 
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Descripción </b> </label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <textarea name="description" id="description" class="form-control" rows="8"> {{ old('description') }}</textarea>
+                            <textarea name="description" id="descriptionEdit" class="form-control" rows="8"> {{ old('description') }}</textarea>
                             <p class="text-warning">{{ $errors->first('description') }}</p>
 
                         </div>

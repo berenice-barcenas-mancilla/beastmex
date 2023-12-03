@@ -154,28 +154,30 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     ***********************************************************************
     */
 
-    // List
-    Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
+    // List // Ruta para mostrar la lista de proveedores. Se utiliza el método 'index' del controlador 'SupplierController' y se asigna el nombre 'suppliers' a esta ruta.
+    Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
     
-    // List JSON
-    Route::get('/supplier/list-supplier', [SupplierController::class, 'getSupplier'])->name('supplierList');
+    // List JSON // Ruta para obtener la lista de proveedores en formato JSON. Se utiliza el método 'getSuppliers' del controlador 'SupplierController' y se asigna el nombre 'suppliersList' a esta ruta.
+    Route::get('/suppliers/list-suppliers', [SupplierController::class, 'getSuppliers'])->name('suppliersList');
 
-    // Info
-    Route::get('/supplier/{supplier}', [SupplierController::class, 'getInfo'])->name('infoSupplier');
+    // Info // Ruta para mostrar la información de un proveedor específico. Se utiliza el método 'getInfo' del controlador 'SupplierController' y se asigna el nombre 'infoSupplier' a esta ruta. El parámetro '{supplier}' indica que se espera un identificador de proveedor como parte de la URL.
+    Route::get('/suppliers/{supplier}', [SupplierController::class, 'getInfo'])->name('infoSupplier');
 
-    // Update
-    Route::patch('/supplier-update/{supplier}', [SupplierController::class, 'update'])->name('updateSupplier');
+    // Update // Ruta para actualizar la información de un proveedor específico. Se utiliza el método 'update' del controlador 'SupplierController' y se asigna el nombre 'updateSupplier' a esta ruta. El verbo HTTP 'PATCH' se utiliza para actualizar parcialmente los datos.
+    Route::patch('/suppliers-update/{supplier}', [SupplierController::class, 'update'])->name('updateSupplier');
 
-    //Store
-    Route::post('/supplier', [SupplierController::class, 'store'])->name('storeSupplier');
+    //Store // Ruta para almacenar un nuevo proveedor. Se utiliza el método 'store' del controlador 'SupplierController' y se asigna el nombre 'storeSupplier' a esta ruta. El verbo HTTP 'POST' se utiliza para crear nuevos recursos.
+    Route::post('/suppliers', [SupplierController::class, 'store'])->name('storeSupplier');
         
-    //Suspended
-    Route::post('/supplier-inactive/{supplier}', [SupplierController::class, 'inactive'])->name('supplierInactived');
+    //Suspended // Ruta para suspender (inactivar) un proveedor específico. Se utiliza el método 'inactive' del controlador 'SupplierController' y se asigna el nombre 'supplierInactived' a esta ruta.
+    Route::post('/suppliers-inactive/{supplier}', [SupplierController::class, 'inactive'])->name('supplierInactived');
 
-    //Actived
-    Route::post('/supplier-active/{supplier}', [SupplierController::class, 'active'])->name('supplierActived');
+    //Actived // Ruta para activar un proveedor específico. Se utiliza el método 'active' del controlador 'SupplierController' y se asigna el nombre 'supplierActived' a esta ruta.
+    Route::post('/suppliers-active/{supplier}', [SupplierController::class, 'active'])->name('supplierActived');
 
-        
+
+
+    
 
     /*
     ***********************************************************************
