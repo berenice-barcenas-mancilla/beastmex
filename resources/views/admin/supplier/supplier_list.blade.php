@@ -1,31 +1,31 @@
-{{-- Se incluye la plantilla ya predefinida del menu --}}
+{{-- Se incluye la plantilla ya predefinida del menú --}}
 @extends('admin.layouts.app')
 
-{{-- Se le da el nombre a la sección segun el sitio que se este consultando --}}
+{{-- Se le da el nombre a la sección según el sitio que se esté consultando --}}
 @section('breadcrumb')
-    <span class="font-weight-bold mr-4">Modulo de Compras</span>
+    <span class="font-weight-bold mr-4">Módulo de Proveedores</span>
 @endsection
 
-{{-- Apartir de esta sección se comienza a estructurar el contenido de este modulo de capacitaciones --}}
+{{-- A partir de esta sección se comienza a estructurar el contenido de este módulo de capacitaciones --}}
 @section('content')
     <!--begin::Card-->
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
                 <h3 class="card-label">
-                    Lista de provedores
+                    Lista de proveedores
                 </h3>
             </div>
 
-            {{-- Mostramos el mensaje con la key --}}
+            {{-- Mostramos el mensaje con la key 'Exito' --}}
             @if (session()->has('Exito'))
                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
-
                     <strong>{{ session('Exito') }}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
 
+            {{-- Verificamos el permiso para crear proveedores --}}
             @can('system.supplier.create')
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -48,7 +48,6 @@
                     <!--end::Button-->
                 </div>
             @endcan
-
         </div>
         <div class="card-body">
 
@@ -64,7 +63,6 @@
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -78,7 +76,7 @@
     </div>
     <!--end::Card-->
 
-    {{-- manejo de mensajes modulo almacen --}}
+    {{-- Manejo de mensajes módulo almacen --}}
     @if (session()->has('Exito'))
         <script>
             Swal.fire({
@@ -89,6 +87,7 @@
         </script>
     @endif
 
+    {{-- Mostramos mensajes de error si existen --}}
     @if ($errors->any())
         <script>
             Swal.fire({
@@ -100,7 +99,42 @@
     @endif
 @endsection
 
+{{-- Incluimos los modales necesarios --}}
 @section('modals')
     @include('admin.forms.supplier.create')
     @include('admin.forms.supplier.edit')
+@endsection
+
+{{-- Definimos variables JavaScript --}}
+@section('scripts')
+    <script>
+        var HOST_URL = "{{ env('APP_HOST', 'http://127.0.0.1:8000') }}";
+        var editSupplier = false;
+        var statusSupplier = false;
+
+        {{-- Verificamos el permiso para editar proveedores --}}
+        @can('system.supplier.edit')
+            editSupplier = true;
+        @endcan
+
+        {{-- Verificamos el permiso para cambiar el estado de proveedores --}}
+        @can('system.supplier.status')
+            statusSupplier = true;
+        @endcan
+    </script>
+
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="js/admin/suppliers.js?v=1.0.3"></script>
+    
+    <script>
+        {{-- Mostramos mensajes Toastr si existen --}}
+        @if (Session::has('status'))
+            toastr.success("{{ Session::get('status') }}");
+        @endif
+
+        @if (Session::has('errorsDB'))
+            toastr.error("{{ Session::get('errorsDB') }}");
+        @endif
+    </script>
+    <!--end::Page Scripts-->
 @endsection
