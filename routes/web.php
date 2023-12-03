@@ -13,7 +13,6 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,10 +43,6 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     
     //Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['auth', IsActive::class])->name('dashboard');
-
-
-        
-        
     /*
     ***********************************************************************
     >>>> Groups
@@ -72,17 +67,7 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     //Delete
     Route::post('/groups/deleted/{role}', [GroupController::class, 'destroy'])->name('groupDeteled');
 
-
-
-
-    /*
-    ***********************************************************************
-    >>>> Management catalogue
-    ***********************************************************************
-    */
-    //list
-    Route::get('/gerencia', [ManagementController::class, 'index'])->name('gerencia.index');
-    //list user
+   
         
     /*
     ***********************************************************************
@@ -92,8 +77,6 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-
-    
     /*
     ***********************************************************************
     >>>> Reports
@@ -123,13 +106,11 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     Route::get('/seller/products', [SellerController::class, 'productos_list'])->name('ventas.products');
     Route::post('/seller/add',[SellerController::class,'productos_add'])->name('ventas.add');
     Route::post('/seller/venta',[SellerController::class,'venta_add'])->name('ventas.venta');
-
     /*
     ***********************************************************************
     >>>> Shop catalogue
     ***********************************************************************
     */
-
     // List
     Route::get('/shop', [ShopController::class, 'index'])->name('shop');
     
@@ -151,7 +132,6 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     //Actived
     Route::post('/shop-active/{shop}', [ShopController::class, 'active'])->name('shopActived');
 
-    
     /*
     ***********************************************************************
     >>>> Supplier catalogue
@@ -179,8 +159,6 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     //Actived // Ruta para activar un proveedor específico. Se utiliza el método 'active' del controlador 'SupplierController' y se asigna el nombre 'supplierActived' a esta ruta.
     Route::post('/suppliers-active/{supplier}', [SupplierController::class, 'active'])->name('supplierActived');
 
-
-
     
 
     /*
@@ -189,25 +167,15 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     ***********************************************************************
     */
 
-    // List
-    Route::get('/store', [StoreController::class, 'index'])->name('store');
+    // ruta recursos
+    Route::resource('store', StoreController::class);
 
-    //list products
-    Route::get('/products', [StoreController::class, 'index_products'])->name('store');
-
-    
     // List JSON
     Route::get('/store/list-store', [StoreController::class, 'getStore'])->name('storeList');
 
     // Info
     Route::get('/store/{store}', [StoreController::class, 'getInfo'])->name('infoStore');
-
-    // Update
-    Route::patch('/store-update/{store}', [StoreController::class, 'update'])->name('updateStore');
-
-    //Store
-    Route::post('/store', [StoreController::class, 'store'])->name('storeStore');
-        
+    
     //Suspended
     Route::post('/store-inactive/{store}', [StoreController::class, 'inactive'])->name('storeInactived');
 
