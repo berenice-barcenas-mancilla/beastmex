@@ -87,7 +87,7 @@
     </script>
 
     <!--begin::Page Scripts(used by this page)-->
-    <script src="/js/admin/groups.js?v=1.0.1"></script>
+    <script src="/js/admin/groups.js?v=1.0.3"></script>
     <!--end::Page Scripts-->
 
 
