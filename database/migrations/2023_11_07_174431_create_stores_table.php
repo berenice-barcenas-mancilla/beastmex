@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->integer('noDeSerie')->unique();
+            $table->string('marca');
+            $table->integer('stock');
+            $table->integer('costoCompra');
+            $table->integer('precioVenta');
+            $table->date('fechaIngreso');
+            $table->string('foto');
+            $table->boolean('estatus');
             $table->timestamps();
         });
     }

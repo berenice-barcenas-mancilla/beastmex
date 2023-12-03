@@ -31,7 +31,7 @@
             </div>
                
                                                 
-            <form class="form" method="post" id="recordReport" action="/reports/detail" target="_blank">
+            <form class="form" method="post" id="recordReport" action="/reports/store" target="_blank">
                 {{ csrf_field() }}
                 <div class="modal-body">
                     <div class="form-group row">
