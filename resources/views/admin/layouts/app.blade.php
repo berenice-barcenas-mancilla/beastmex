@@ -229,7 +229,7 @@
                                         @can('system.supplier.list')
                                             <li class="menu-item @if ($PAGE_NAVIGATION == 'SUPPLIER') menu-item-active @endif"
                                                 aria-haspopup="true">
-                                                <a href="/supplier" class="menu-link ">
+                                                <a href="/suppliers" class="menu-link ">
                                                     <span class="svg-icon menu-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                                                         width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -618,17 +618,17 @@
     <!--end::Page Scripts-->
 
     <!-- Toastr -->
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> --}}
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> 
 
     @yield('scripts')
-{{-- 
+
     <script>
         @if (isset($errors) && count($errors) > 0)
             @foreach ($errors->all() as $error)
                 toastr.error("{{ $error }}")
             @endforeach
         @endif
-    </script> --}}
+    </script>
 
 
     @yield('javascript')
