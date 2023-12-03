@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Store;
 use Illuminate\Http\Request;
 use Exception;
@@ -15,7 +13,6 @@ class StoreController extends Controller
     *
     * @return void
     */
-    
     public function __construct()
     {
         $this->middleware(function ($request, $next){
@@ -34,41 +31,16 @@ class StoreController extends Controller
     public function index()
     {
         $PAGE_NAVIGATION = "STORE";
- 
-        return view('admin.store.store_list', compact('PAGE_NAVIGATION'));
+        $allProducts = Store::all();
+        return view('admin.store.storeproducts_list', compact('PAGE_NAVIGATION', 'allProducts'));
     }
 
     public function index_products()
     {
         $PAGE_NAVIGATION = "STORE";
-
-        
-        return view('admin.store.storeproducts_list', compact('PAGE_NAVIGATION'));
+        $allProducts = Store::all();
+        return view('admin.store.storeproducts_list', compact('PAGE_NAVIGATION', 'allProducts'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        if (!Gate::allows('system.store.create')) {
-            abort(403, "No estas autorizado para registrar información");
-        }
-
-            // Validaciones personalizadas
-            $validatedData = $request->validate([
-                'txtName' => 'required|string',
-                'txtSerialNumber' => 'required|integer',
-                'txtStock' => 'required|integer',
-                'brand' => 'required',
-                'txtPurchaseCost' => 'required|numeric',
-                'txtEntryDate' => 'required|date',
-                'status' => 'required|in:Activo,Inactivo',
-            ]);
-
-        $nombre = $request->input('txtName');
-        return redirect('/store')->with('Exito',  'El producto ' . $nombre . ' guardado con éxito');
-      }
 
     /**
      * Store a newly created resource in storage.
@@ -76,8 +48,35 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         //
-    }
+        if (!Gate::allows('system.store.create')) {
+            abort(403, "No estas autorizado para registrar información");
+        }
+            $validatedData = $request->validate([
+                'txtName' => 'required|string',
+                'txtSerialNumber' => 'required|integer',
+                'txtStock' => 'required|integer',
+                'brand' => 'required',
+                'txtPurchaseCost' => 'required|numeric',
+                
+            ]);
+            $imageName = time() . '.' . $request->txtPhoto->extension();
+            $request->txtPhoto->move(public_path('images'), $imageName);
 
+
+
+        $addProducto = new Store();
+        $addProducto->nombre = $request->input('txtName');
+        $addProducto->noDeSerie = $request->input('txtSerialNumber');
+        $addProducto->marca = $request->input('brand');
+        $addProducto->stock = $request->input('txtStock');
+        $addProducto->costoCompra = $request->input('txtPurchaseCost');
+        $addProducto->precioVenta = $request->input('txtPurchaseCost') + ($request->input('txtPurchaseCost') * 0.55);
+        $addProducto->fechaIngreso = $request->input('txtEntryDate');       
+        $addProducto->foto = $imageName;
+        $addProducto->estatus = $request->input('status');
+        $addProducto->save();
+        return redirect('/store')->with('Exito',  'El producto ' . $addProducto->nombre . ' se ha registrado con éxito');
+    }
     /**
      * Display the specified resource.
      */
@@ -85,7 +84,6 @@ class StoreController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -93,31 +91,28 @@ class StoreController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Store $store)
+    public function update(Request $request, $id)
     {
         if (!Gate::allows('system.store.edit')) {
             abort(403, "No estas autorizado para registrar información");
         }
+        $updateProducto = Store::findOrFail($id);
+        $updateProducto->nombre = $request->input('txtName');
+        $updateProducto->noDeSerie = $request->input('txtSerialNumber');
+        $updateProducto->marca = $request->input('brand');
+        $updateProducto->stock = $request->input('txtStock');
+        $updateProducto->costoCompra = $request->input('txtPurchaseCost');
+        $updateProducto->precioVenta = $request->input('txtPurchaseCost') + ($request->input('txtPurchaseCost') * 0.55);
+        $updateProducto->fechaIngreso = $request->input('txtEntryDate');
+        $updateProducto->estatus = $request->input('status');
+        $updateProducto->update();
+        return redirect('/store')->with('Exito',  'El producto ' . $updateProducto->nombre . ' se ha actualizado con éxito');
+        
 
-            // Validaciones personalizadas
-            $validatedData = $request->validate([
-                'txtName' => 'required|string',
-                'txtSerialNumber' => 'required|integer',
-                'txtStock' => 'required|integer',
-                'brand' => 'required',
-                'txtPurchaseCost' => 'required|numeric',
-                'txtEntryDate' => 'required|date',
-                'status' => 'required|in:Activo,Inactivo',
-            ]);
-
-        $nombre = $request->input('txtName');
-        return redirect('/store')->with('Exito',  'El producto ' . $nombre . ' actualizado con éxito');
-        }
-
+            }
     /**
      * Remove the specified resource from storage.
      */
