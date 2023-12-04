@@ -41,6 +41,7 @@ class CartController extends Controller
             'cliente' => $request->input('cliente'),
             'fecha' => $request->input('fecha'),
             'Content' => Cart::content(),
+            'total' => $request->input('total'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
