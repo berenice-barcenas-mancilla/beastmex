@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\Store;
+
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Components\Shops\Create\Add;
+use Components\Shops\Update\Adjust;
+use PDF;
+use Carbon\Carbon;
+
 class ShopController extends Controller
 {
     /**
@@ -35,69 +43,37 @@ class ShopController extends Controller
     {
         $PAGE_NAVIGATION = "SHOP";
  
-        return view('admin.shopping.shopping_list', compact('PAGE_NAVIGATION'));
+        $store=Store::storesList();
+        return view('admin.shopping.shopping_list', compact('PAGE_NAVIGATION','store'));
+    
     }
  
- 
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getShops(Request $request)
     {
-        //
+        // Obtiene la lista de compras
+        $shops = Shop::getShops();
+        // Retorna la lista de compras en formato JSON
+        return response()->json(['data' => $shops]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Permite consultar un compras extrayendo toda su información.
+     * @param  \App\Models\Shop $shop 
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function getInfo(Shop  $shop)
     {
-        // if (!Gate::allows('system.shop.create')) {
-        //     abort(403, "No estas autorizado para registrar información");
-        // }
-
-            // Validaciones personalizadas
-            $validatedData = $request->validate([
-                'product' => 'required|string',
-                'name' => 'required|string',
-                'supplier' => 'required|string',
-                'email' => 'required|email',
-            ]);
-
-        $nombre = $request->input('txtName');
-        return redirect('/shop')->with('Exito',  'La orden de compra ' . $nombre . ' guardado con éxito');
+        // Verifica si el compras existe
+        if (!isset($shop->id)){
+            return response()->json(['exito'=>false]);   
+        } else {
+            // Retorna la información del compras en formato JSON
+            return response()->json(['exito'=>true, 'shop' => $shop]);   
+        }
     }
+    
+    
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Shop $shop)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Shop $shop)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Shop $shop)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Shop $shop)
-    {
-        //
-    }
 }
