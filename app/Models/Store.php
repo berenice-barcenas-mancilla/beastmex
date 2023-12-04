@@ -52,10 +52,16 @@ class Store extends Model
      */
     public static function storesList()
     {
-        $stores = Store::select('id', 'nombre', 'noDeSerie', 'stock', 'costoCompra', 'precioVenta', 'fechaIngreso', 'foto', 'estatus')
+        $stores = Store::select('id', 'nombre', 'noDeSerie','marca','stock', 'costoCompra', 'precioVenta', 'fechaIngreso', 'foto', 'estatus')
             ->get();
         return $stores;
     }
+
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+
 
 
 

@@ -115,7 +115,7 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     Route::get('/shops', [ShopController::class, 'index'])->name('shops');
     
     // List JSON
-    Route::get('/shops/list-shops', [ShopController::class, 'getShop'])->name('shopsList');
+    Route::get('/shops/list-shops', [ShopController::class, 'getShops'])->name('shopsList');
 
     // Info
     Route::get('/shops/{shop}', [ShopController::class, 'getInfo'])->name('infoShop');

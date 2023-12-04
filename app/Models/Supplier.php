@@ -43,6 +43,11 @@ class Supplier extends Model
         return $suppliers;
     }
 
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+
 
     
 

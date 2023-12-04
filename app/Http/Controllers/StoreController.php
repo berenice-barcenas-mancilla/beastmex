@@ -153,15 +153,6 @@ class StoreController extends Controller
         }
     }
 
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-        $results = Store::where('nombre', 'like', '%' . $query . '%')
-            ->orWhere('noDeSerie', 'like', '%' . $query . '%')
-            ->get();
-        return response()->json($results);
-    }
-
 
 
 
