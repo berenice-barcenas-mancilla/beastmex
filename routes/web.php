@@ -89,13 +89,20 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     Route::get('/reports', [ReportController::class, 'index'])->name('reports');
   
     // Shop Report
-    Route::post('/reports/detail', [ReportController::class, 'generarReporteC'])->name('indexReportDetailC');
+    Route::post('/reports/shop', [ReportController::class, 'generarReporteC'])->name('indexReportDetailC');
     // Sells Report
     Route::post('/reports/detail', [ReportController::class, 'generarReporteV'])->name('indexReportDetailV');
     // Management Report
     Route::post('/reports/detail', [ReportController::class, 'generarReporteG'])->name('indexReportDetailG');
     // Storage Report
     Route::post('/reports/store', [ReportController::class, 'generarReporteA'])->name('indexReportDetailA');
+
+    //Graphs
+
+    Route::post('/reports/shopgraph', [ReportController::class, 'generarGraficaC'])->name('indexGraphsC');
+    Route::post('/reports/sellsgraph', [ReportController::class, 'generarGraficaV'])->name('indexGraphsV');
+    Route::post('/reports/mannagementgraph', [ReportController::class, 'generarGraficaG'])->name('indexGraphsG');
+    Route::post('/reports/storegraph', [ReportController::class, 'generarGraficaA'])->name('indexGraphsA');
 
 
     /*
