@@ -7,7 +7,7 @@ var KTDatatableAutoColumnHideDemo = function () {
     // basic demo
     var demo = function () {
 
-        var datatable = $('#kt_datatable').KTDatatable({
+        var datatable = $('#kt_datatable_productos').KTDatatable({
             // datasource definition
             data: {
                 type: 'remote',

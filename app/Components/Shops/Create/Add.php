@@ -5,7 +5,7 @@ namespace Components\Shops\Create;
 use App\Models\Shop;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Exception;
 class Add
 {
     protected $shopData;
@@ -37,15 +37,21 @@ class Add
                 // Insertar orden de compra
                 $shop = Shop::with('supplier')->create($this->setup());
 
-                return redirect()
-                    ->back()
-                    ->with('errors', 'No tienes permisos para ver el PDF.');
+                return redirect('/shops')
+                    ->with('status', 'Proveedor registrado satisfactoriamente');
 
-            } catch (\Exception $e) {
-                return redirect()->back()->with('errorsDB', 'Ocurrió un error al registrar la orden de compra en la base de datos. Si el problema persiste, consulte a su administrador');
+            } catch (Exception $e) {
+                // En caso de error, se redirecciona a la página de proveedores con un mensaje de error
+                return redirect('/shops')
+                    ->with('errorsDB', 'Ocurrió un error al registrar el proveedor en la base de datos. Si persiste el problema, consulte a su administrador.');
             }
+
+            // Se redirecciona a la ruta de proveedores (¿Este return es necesario?)
+            return redirect()->route('shops');
+
         } else {
-            return redirect()->back()
+            // Si la validación falla, se redirecciona a la página de proveedores con los errores y los datos ingresados
+            return redirect('/suppliers')
                 ->withErrors($validator)
                 ->withInput();
         }

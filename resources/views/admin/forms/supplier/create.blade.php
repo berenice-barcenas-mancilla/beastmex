@@ -46,7 +46,6 @@
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Razon Social *</b> </label>
                         <div class="col-lg-6 col-md-4 col-sm-12">
                             <input type="text" class="form-control" id="supplier"  name="supplier" placeholder="Ingresa la razon social de la empresa" value="{{ old('supplier') }}"/>
-                            <p class="text-warning">{{ $errors->first('supplier') }}</p>
 
                         </div>
                     </div>
@@ -56,7 +55,6 @@
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Descripción </b> </label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <textarea name="description" id="description" class="form-control" rows="8"> {{ old('description') }}</textarea>
-                            <p class="text-warning">{{ $errors->first('description') }}</p>
 
                         </div>
                     </div>
@@ -66,7 +64,6 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <input type="email" class="form-control" id="email" required name="email" placeholder="Ingresa el correo" value="{{ old('email') }}"/>
                         </div>
-                        <p class="text-warning">{{ $errors->first('email') }}</p>
 
                     </div>
                 

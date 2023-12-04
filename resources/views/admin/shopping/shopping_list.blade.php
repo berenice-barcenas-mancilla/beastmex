@@ -33,11 +33,11 @@
                             </div>
 
                             <div class="col-md-4 my-2 my-md-0">
-    <select class="form-control" id="kt_datatable_search_field">
-        <option value="nombre">Nombre</option>
-        <option value="noDeSerie">Número de Serie</option>
-    </select>
-</div>
+                                <select class="form-control" id="kt_datatable_search_field">
+                                    <option value="nombre">Nombre</option>
+                                    <option value="noDeSerie">Número de Serie</option>
+                                </select>
+                            </div>
 
                         </div>
                     </div>
@@ -47,12 +47,13 @@
 
             <!--begin: Datatable-->
             <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_productos"></div>
+
             <!--end: Datatable-->
         </div>
     </div>
     <!--end::Card Productos-->
 
-    <br><br><br>
+    <br><br>
     <!--begin::Card-->
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
@@ -61,15 +62,6 @@
                     Lista de compras
                 </h3>
             </div>
-
-            {{-- Mostramos el mensaje con la key --}}
-            @if (session()->has('Exito'))
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-
-                    <strong>{{ session('Exito') }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
 
             @can('system.shop.create')
                 <div class="card-toolbar">
@@ -117,48 +109,34 @@
             <!--end::Search Form-->
 
             <!--begin: Datatable-->
-            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_compras"></div>
+            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
             <!--end: Datatable-->
 
 
         </div>
     </div>
     <!--end::Card-->
-
 @endsection
 
 @section('modals')
     @include('admin.forms.shopping.create')
 @endsection
 
-
-
 {{-- Definimos variables JavaScript --}}
 @section('scripts')
     <script>
         var HOST_URL = "{{ env('APP_HOST', 'http://127.0.0.1:8000') }}";
-        var editShop = false;
-        var statusShop= false;
-        var ver = false;
-
-        {{-- Verificamos el permiso para editar compras --}}
-        @can('system.shop.edit')
-            editShop = true;
-        @endcan
-
+        var statusShop = false;
         {{-- Verificamos el permiso para cambiar el estado de compras --}}
         @can('system.shop.status')
             statusShop = true;
         @endcan
-        @can('system.shop.view')
-             ver = true;
-         @endcan
     </script>
 
-    <!--begin::Page Scripts(used by this page)
-    <script src="js/admin/stores.js?v=1.0.5"></script>-->
-  <script src="js/admin/shops.js?v=1.0.7"></script> 
-    
+    <script src="js/admin/stores.js?v=1.0.3"></script>
+    <script src="js/admin/shops.js?v=1.0.3"></script>
+
+
     <script>
         {{-- Mostramos mensajes Toastr si existen --}}
         @if (Session::has('status'))

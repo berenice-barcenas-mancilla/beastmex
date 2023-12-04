@@ -33,7 +33,7 @@ class Supplier extends Model
      * Método que permite extraer todos los proveedores de la base de datos, ordenados por el atributo 'supplier'.
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function getSuppliers() 
+    public static function getSuppliers()
     {
         // Consulta a la base de datos para obtener todos los proveedores ordenados por 'supplier'.
         $suppliers = Supplier::
@@ -45,10 +45,11 @@ class Supplier extends Model
 
     public function shops()
     {
-        return $this->hasMany(Shop::class);
+        return $this->hasMany(Shop::class, 'supplier_id', 'id');
     }
 
 
-    
+
+
 
 }
