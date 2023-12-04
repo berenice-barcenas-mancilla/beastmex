@@ -216,7 +216,9 @@
                     <th scope="col">Fecha de Ingreso</th>
                     <th scope="col">Foto</th>
                     <th scope="col">Estatus</th>
+                    @can('system.store.edit')
                     <th scope="col">Opciones</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>

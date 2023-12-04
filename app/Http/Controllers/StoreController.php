@@ -89,11 +89,11 @@ class StoreController extends Controller
         }
     
         $validatedData = $request->validate([
-            'txtName' => 'string',
-            'txtSerialNumber' => 'integer',
-            'txtStock' => 'integer',
+            'txtName' => 'string|required',
+            'txtSerialNumber' => 'integer|required',
+            'txtStock' => 'integer|required',
             'brand' => 'required',
-            'txtPurchaseCost' => 'numeric',
+            'txtPurchaseCost' => 'numeric|required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     
