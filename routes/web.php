@@ -86,8 +86,16 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     // List
     Route::get('/reports', [ReportController::class, 'index'])->name('reports');
   
-    // Index detail reports
-    Route::post('/reports/detail', [ReportController::class, 'indexDetail'])->name('indexReportDetail');
+    // Shop Report
+    Route::post('/reports/detail', [ReportController::class, 'generarReporteC'])->name('indexReportDetailC');
+    // Sells Report
+    Route::post('/reports/detail', [ReportController::class, 'generarReporteV'])->name('indexReportDetailV');
+    // Management Report
+    Route::post('/reports/detail', [ReportController::class, 'generarReporteG'])->name('indexReportDetailG');
+    // Storage Report
+    Route::post('/reports/store', [ReportController::class, 'generarReporteA'])->name('indexReportDetailA');
+
+
     /*
     ***********************************************************************
     >>>> Seller catalogue

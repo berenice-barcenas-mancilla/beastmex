@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\App;
+
 
 class ReportController extends Controller
 {
@@ -85,5 +88,31 @@ class ReportController extends Controller
     public function destroy(Report $report)
     {
         //
+    }
+
+    public function generarReporteC(Request $request)
+    {
+        
+    }
+
+    public function generarReporteV(Request $request)
+    {
+        
+    }
+
+    public function generarReporteG(Request $request)
+    {
+        
+    }
+
+    public function generarReporteA(Request $request)
+    {
+        $pdf = App::make('dompdf.wrapper');
+
+        $allProducts = Store::all();
+
+        $pdf->loadHTML('<h1>Test</h1>');
+
+        return $pdf->stream();
     }
 }
