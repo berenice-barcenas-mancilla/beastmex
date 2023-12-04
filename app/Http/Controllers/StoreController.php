@@ -52,7 +52,7 @@ class StoreController extends Controller
         }
             $validatedData = $request->validate([
                 'txtName' => 'required|string',
-                'txtSerialNumber' => 'required|integer',
+                'txtSerialNumber' => 'required|integer|unique::stores,noDeSerie',
                 'txtStock' => 'required|integer',
                 'brand' => 'required',
                 'txtPurchaseCost' => 'required|numeric',
@@ -92,7 +92,7 @@ class StoreController extends Controller
     
         $validatedData = $request->validate([
             'txtName' => 'string|required',
-            'txtSerialNumber' => 'integer|required',
+            'txtSerialNumber' => 'integer|required|unique:stores,noDeSerie'.$id.',id',
             'txtStock' => 'integer|required',
             'brand' => 'required',
             'txtPurchaseCost' => 'numeric|required',
@@ -146,14 +146,6 @@ class StoreController extends Controller
         $statusProducto->update();
         return redirect('/store')->with('Exito', 'El producto ' . $statusProducto->nombre . ' se ha actualizado con éxito');
     }
-    // public function search(Request $request)
-    // {
-    //     $query = $request->input('query');
-    //     $results = Store::where('nombre', 'like', '%' . $query . '%')
-    //         ->orWhere('noDeSerie', 'like', '%' . $query . '%')
-    //         ->get();
-    //     return response()->json($results);
-    // }
 
 
     /***********************************
