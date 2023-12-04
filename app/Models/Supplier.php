@@ -47,11 +47,14 @@ class Supplier extends Model
 
     // ***************************************************
     // Relationship
-    // ***************************************************
+    // **************************************************
+
+    /**
+     * Compras asociadas al proveedor
+     **/
     public function shops()
     {
-        return $this->belongsToMany(Shop::class, 'shop_supplier') 
-                    ->withPivot('application_date', 'delivery_date', 'status', 'description', 'amount', 'state', 'document_support', 'employee_id','uniform_id','id');
+        return $this->hasMany(Shop::class, 'supplier_id');
     }
 
 

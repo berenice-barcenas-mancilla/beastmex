@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id')->index();
             $table->integer('amount');
             $table->date('fecha_compra')->nullable();
+            $table->string('document_file')->nullable();
             $table->timestamps();
             $table->foreign('supplier_id')->references('id')->on('suppliers')
                 ->onDelete('cascade')->onUpdate('cascade');

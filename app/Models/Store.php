@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Store extends Model
 {
     use HasFactory;
+
+    
+    // ***************************************************
+    // Relationship
+    // **************************************************
+
+    /**
+     * Compras asociadas al proveedor
+     **/
+    public function shops()
+    {
+        return $this->hasMany(Shop::class, 'product_id');
+    }
+
 }
