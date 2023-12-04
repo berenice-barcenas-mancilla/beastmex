@@ -184,6 +184,11 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     //Actived
     Route::post('/store-active/{store}', [StoreController::class, 'active'])->name('storeActived');
 
+    // List JSON
+    Route::get('/stores/list-stores', [StoreController::class, 'getStores'])->name('storesList');
+
+    // Info
+    Route::get('/stores/{store}', [StoreController::class, 'getInfo'])->name('infoStore');
 
 
 
