@@ -21,6 +21,7 @@ class Supplier extends Model
     protected $fillable = [
         'supplier',
         'description',
+        'email',
         'status'
     ];
 
@@ -41,4 +42,13 @@ class Supplier extends Model
         // Devuelve la colección de proveedores obtenida de la base de datos.
         return $suppliers;
     }
+
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+
+
+    
+
 }

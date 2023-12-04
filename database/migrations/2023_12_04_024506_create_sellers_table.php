@@ -9,12 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('shops', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+    Schema::create('seller', function (Blueprint $table) {
+        $table->id();
+        $table->string('cliente');
+        $table->date('fecha');
+        $table->longText('content');
+        $table->timestamps();
+    });
     }
 
     /**
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shops');
+        Schema::dropIfExists('sellers');
     }
 };

@@ -6,8 +6,53 @@
     <span class="font-weight-bold mr-4">Modulo de Compras</span>
 @endsection
 
-{{-- Apartir de esta sección se comienza a estructurar el contenido de este modulo de capacitaciones --}}
+{{-- Apartir de esta sección se comienza a estructurar el contenido de este modulo de compras --}}
 @section('content')
+    <!--begin::Productos -->
+    <div class="card card-custom">
+        <div class="card-header flex-wrap border-0 pt-6 pb-0">
+            <div class="card-title">
+                <h3 class="card-label">
+                    Lista de productos
+                </h3>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <!--begin::Search Form-->
+            <div class="mb-7">
+                <div class="row align-items-center">
+                    <div class="col-lg-9 col-xl-8">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 my-2 my-md-0">
+                                <div class="input-icon">
+                                    <input type="text" class="form-control" placeholder="Buscar..."
+                                        id="kt_datatable_search_query" />
+                                    <span><i class="flaticon2-search-1 text-muted"></i></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 my-2 my-md-0">
+    <select class="form-control" id="kt_datatable_search_field">
+        <option value="nombre">Nombre</option>
+        <option value="noDeSerie">Número de Serie</option>
+    </select>
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Search Form-->
+
+            <!--begin: Datatable-->
+            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_productos"></div>
+            <!--end: Datatable-->
+        </div>
+    </div>
+    <!--end::Card Productos-->
+
+    <br><br><br>
     <!--begin::Card-->
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
@@ -72,35 +117,57 @@
             <!--end::Search Form-->
 
             <!--begin: Datatable-->
-            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_compras"></div>
             <!--end: Datatable-->
+
+
         </div>
     </div>
     <!--end::Card-->
 
-    {{-- manejo de mensajes modulo almacen --}}
-    @if (session()->has('Exito'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: "{{ session('Exito') }}",
-            });
-        </script>
-    @endif
-
-    @if ($errors->any())
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se envió el formulario, por favor verifique los datos',
-            });
-        </script>
-    @endif
 @endsection
 
 @section('modals')
     @include('admin.forms.shopping.create')
-    @include('admin.forms.shopping.edit')
+@endsection
+
+
+
+{{-- Definimos variables JavaScript --}}
+@section('scripts')
+    <script>
+        var HOST_URL = "{{ env('APP_HOST', 'http://127.0.0.1:8000') }}";
+        var editShop = false;
+        var statusShop= false;
+        var ver = false;
+
+        {{-- Verificamos el permiso para editar compras --}}
+        @can('system.shop.edit')
+            editShop = true;
+        @endcan
+
+        {{-- Verificamos el permiso para cambiar el estado de compras --}}
+        @can('system.shop.status')
+            statusShop = true;
+        @endcan
+        @can('system.shop.view')
+             ver = true;
+         @endcan
+    </script>
+
+    <!--begin::Page Scripts(used by this page)
+    <script src="js/admin/stores.js?v=1.0.5"></script>-->
+  <script src="js/admin/shops.js?v=1.0.7"></script> 
+    
+    <script>
+        {{-- Mostramos mensajes Toastr si existen --}}
+        @if (Session::has('status'))
+            toastr.success("{{ Session::get('status') }}");
+        @endif
+
+        @if (Session::has('errorsDB'))
+            toastr.error("{{ Session::get('errorsDB') }}");
+        @endif
+    </script>
+    <!--end::Page Scripts-->
 @endsection

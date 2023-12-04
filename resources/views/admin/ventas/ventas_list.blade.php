@@ -18,6 +18,13 @@
     </script>
     @endif
 
+@if(session()->has('confirmacion'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong> {{session('confirmacion')}} </strong>
+    </div>
+@endif
+
+
     <!--begin::Card-->      
     <div class="card card-custom">
 	    <div class="card-header flex-wrap border-0 pt-6 pb-0">
@@ -70,7 +77,7 @@
                                         <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                         </svg><!--end::Svg Icon-->
                                     </span>	
-                                    Carrito
+                                    Carrito <span class="badge bg-danger">{{Cart::count()}}</span>
                                 </a>
                             <!--end::Button-->
                             </div>
@@ -81,13 +88,11 @@
             <!--end::Search Form-->
 
 		    <!--begin: Datatable-->
-		    <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+		    
 		    <!--end: Datatable-->
 	    </div>
     </div>
     <!--end::Card-->
-    <form action="/seller/add" method="post">
-    @csrf
     <!-- Start table -->
     <div class="mt-5">
         <table class="table table-hover ">
@@ -102,56 +107,31 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($products as $item)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Otto</td>
+                    <th scope="row">{{$item->id}}</th>
+                    <td>{{$item->nombre}}</td>
+                    <td>{{$item->marca}}</td>
+                    <td>{{$item->stock}}</td>
+                    <td>{{$item->precioVenta}}</td>
                     <td>
-                        <a type="submit" class="btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"/>
-                        </svg>
-                        </a>
-                    </td>   
-                </tr>                    <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>Otto</td>
-                    <td>
-                        <a type="submit" class="btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"/>
-                        </svg>
-                        </a>
-                    </td> 
+                        <form action="{{route('add')}}" method="post">
+                        @csrf
+                            <input type="hidden" name="id" value="{{$item->id}}">
+                            <button type="submit" class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"/>
+                            </svg>
+                            </button>
+                        </form>
+                    </td>
+                      
                 </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>Otto</td>
-                    <td>
-                        <a type="submit" class="btn" >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"/>
-                        </svg>
-                        </a>
-                    </td> 
-                </tr>
+                @endforeach 
             </tbody>
         </table>
 
-        </form>
-    @if(session()->has('confirmacion'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong> {{session('confirmacion')}} </strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
+        
 
     </div>
     

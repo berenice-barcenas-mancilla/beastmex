@@ -16,8 +16,6 @@
                     Lista de productos
                 </h3>
             </div>
-
-
             @can('system.store.create')
                 <div class="card-toolbar">
                     <div class="dropdown dropdown-inline mr-2">
@@ -113,6 +111,16 @@
                 </script>
             @endif
 
+            @if (session()->has('Error'))
+                <script>
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Ojo',
+                        text: "{{ session('Error') }}",
+                    });
+                </script>
+            @endif
+
             @if ($errors->any())
                 <script>
                     Swal.fire({
@@ -128,36 +136,63 @@
 
             <!--begin::Search Form-->
             <div class="mb-7">
-                <div class="row align-items-center">
-                    <div class="col-lg-9 col-xl-8">
-                        <div class="row align-items-center">
-                            <div class="col-md-4 my-2 my-md-0">
-                                <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="Buscar..."
-                                        id="kt_datatable_search_query" />
-                                    <span><i class="flaticon2-search-1 text-muted"></i></span>
-                                </div>
-                            </div>
+                <form>
+                    <div class="row align-items-center">
+                        <div class="col-lg-9 col-xl-8">
+                            <div class="row align-items-center">
 
-                            <div>
-                                <!--begin::Button-->
-                                <a href="#" class="btn btn-primary font-weight-bolder">
-                                    <span class="svg-icon svg-icon-md">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" />
-                                        </svg><!--end::Svg Icon-->
-                                    </span>
-                                    Filtrar
-                                </a>
-                                <!--end::Button-->
+                                <div class="col-md-4 my-2 my-md-0 position-relative">
+                                    <div class="input-group">
+                                        <input type="text" name="searchby" class="form-control" placeholder="Buscar..." id="searchby" value="{{ $searchby }}" />
+                                        <span class="input-group-text"><i class="fas fa-info-circle info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Buscar por nombre o número de serie"></i></span>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+
+                                <div>
+                                    <!--begin::Button-->
+                                    <button type="submit" class="btn btn-primary font-weight-bolder" id="filterButton">
+                                        <span class="svg-icon svg-icon-md">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" />
+                                            </svg><!--end::Svg Icon-->
+                                        </span>
+                                        Filtrar
+                                    </button>
+                                    <button type="button" class="btn btn-secondary font-weight-bolder" id="clearButton"
+                                        style="display:inline-block;">
+                                        Limpiar
+                                    </button>
+                                    <!--end::Button-->
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <!--end::Search Form-->
+
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Obtener referencia al botón de limpiar y al input de búsqueda
+                    const clearButton = document.getElementById('clearButton');
+                    const searchInput = document.getElementById('searchby');
+
+                    // Agregar un evento de clic al botón de limpiar
+                    clearButton.addEventListener('click', function() {
+                        // Verificar si el input de búsqueda contiene algo
+                        if (searchInput.value.trim() !== '') {
+                            // Redirigir a la ruta store
+                            window.location.href = '/store';
+                        }
+                    });
+                });
+            </script>
 
             <!--begin: Datatable-->
             <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
@@ -181,7 +216,9 @@
                     <th scope="col">Fecha de Ingreso</th>
                     <th scope="col">Foto</th>
                     <th scope="col">Estatus</th>
+                    @can('system.store.edit')
                     <th scope="col">Opciones</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -195,8 +232,10 @@
                         <td>{{ $item->costoCompra }}</td>
                         <td>{{ $item->precioVenta }}</td>
                         <td>{{ $item->fechaIngreso }}</td>
-                        <td>{{ $item->foto }}
-                            <img src="{{ asset('images/box.png') }}" alt="Foto" width="15">
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#imageModal{{ $item->id }}">
+                                <img src="{{ asset('images/' . $item->foto) }}" alt="Foto" width="15">
+                            </a>
                         </td>
                         <td>
                             @if ($item->estatus == 1)
@@ -205,27 +244,26 @@
                                 Inactivo
                             @endif
                         <td>
-                            @can('system.store.status')
-                                @if ($item->estatus == 0)
-                                    <a href="#" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#userStatusModal{{ $item->id }}">
-                                        <img src="{{ asset('images/sun.png') }}" alt="Cambiar estatus" width="15">
-                                    </a>
-                                @else
-                                    <a href="#" class="btn btn-danger">
-                                        <img src="{{ asset('images/moon.png') }}" alt="Cambiar estatus" width="15">
-                                    </a>
-                                @endif
-                            @endcan
                             @can('system.store.edit')
                                 <a href="#" class="btn btn-warning" data-toggle="modal"
                                     data-target="#userEditModal{{ $item->id }}">
                                     <img src="{{ asset('images/edit-circle.png') }}" alt="Editar" width="15">
                                 </a>
                             @endcan
+                            @can('system.store.status')
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#confirmationModal{{ $item->id }}">
+                                    @if ($item->estatus == 0)
+                                        <img src="{{ asset('images/sun.png') }}" alt="Activar" width="15">
+                                    @else
+                                        <img src="{{ asset('images/moon.png') }}" alt="Desactivar" width="15">
+                                    @endif
+                                </button>
+                            @endcan
                         </td>
                     </tr>
                     @include('admin.forms.storage.edit')
+                    @include('admin.forms.storage.status')
                 @endforeach
             </tbody>
         </table>
@@ -235,5 +273,4 @@
 
 @section('modals')
     @include('admin.forms.storage.create')
-
 @endsection

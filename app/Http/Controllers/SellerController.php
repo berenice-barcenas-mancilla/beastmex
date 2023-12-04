@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Store;
 use Administration\Users\Create\Add;
 use Administration\Users\Update\Adjust;
 
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Cart;
 
 use Spatie\Permission\Models\Role;
 
@@ -44,9 +46,9 @@ class SellerController extends Controller
     public function indexVentas()
     {
         $PAGE_NAVIGATION = "SELLER";
-        $roles = Role::where('id', '!=', 1)->orderBy('name')->get(['id', 'name']);
+        $sells = Store::all();
 
-        return view('admin.ventas.ventas_dashboard', compact('PAGE_NAVIGATION', 'roles'));
+        return view('admin.ventas.ventas_dashboard', compact('PAGE_NAVIGATION', 'sells'));
     }
 
 
@@ -58,9 +60,10 @@ class SellerController extends Controller
     public function productos_list()
     {
         $PAGE_NAVIGATION = "SELLER";
-        $roles = Role::where('id', '!=', 1)->orderBy('name')->get(['id', 'name']);
+        $products = Store::all();
+        /* $roles = Role::where('id', '!=', 1)->orderBy('name')->get(['id', 'name']); */
 
-        return view('admin.ventas.ventas_list', compact('PAGE_NAVIGATION', 'roles'));
+        return view('admin.ventas.ventas_list', compact('PAGE_NAVIGATION', 'products'));
     }
 
        /**

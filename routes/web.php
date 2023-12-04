@@ -11,8 +11,10 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactanosMailable;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,34 +105,46 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     */
         
     Route::get('/seller', [SellerController::class, 'indexVentas'])->name('ventas.dashboard');
+
+    Route::post('cart/add', [CartController::class, 'add'])->name('add');
+
+    Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
+
+    Route::get('cart/clear', [CartController::class, 'clear'])->name('clear');
+
+    Route::post('cart/removeitem', [CartController::class, 'removeItem'])->name('removeitem');
+
     Route::get('/seller/products', [SellerController::class, 'productos_list'])->name('ventas.products');
-    Route::post('/seller/add',[SellerController::class,'productos_add'])->name('ventas.add');
-    Route::post('/seller/venta',[SellerController::class,'venta_add'])->name('ventas.venta');
+
+    Route::post('cart/Comprar', [CartController::class, 'comprar'])->name('comprar');
+
     /*
     ***********************************************************************
     >>>> Shop catalogue
     ***********************************************************************
     */
     // List
-    Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+    Route::get('/shops', [ShopController::class, 'index'])->name('shops');
     
     // List JSON
-    Route::get('/shop/list-shop', [ShopController::class, 'getShop'])->name('shopList');
+    Route::get('/shops/list-shops', [ShopController::class, 'getShops'])->name('shopsList');
 
     // Info
-    Route::get('/shop/{shop}', [ShopController::class, 'getInfo'])->name('infoShop');
+    Route::get('/shops/{shop}', [ShopController::class, 'getInfo'])->name('infoShop');
 
     // Update
-    Route::patch('/shop-update/{shop}', [ShopController::class, 'update'])->name('updateShop');
+    Route::patch('/shops-update/{shop}', [ShopController::class, 'update'])->name('updateShop');
 
     //Store
-    Route::post('/shop', [ShopController::class, 'store'])->name('shopStore');
+    Route::post('/shops', [ShopController::class, 'store'])->name('shopStore');
         
     //Suspended
-    Route::post('/shop-inactive/{shop}', [ShopController::class, 'inactive'])->name('shopInactived');
+    Route::post('/shops-inactive/{shop}', [ShopController::class, 'inactive'])->name('shopInactived');
 
     //Actived
-    Route::post('/shop-active/{shop}', [ShopController::class, 'active'])->name('shopActived');
+    Route::post('/shops-active/{shop}', [ShopController::class, 'active'])->name('shopActived');
+
+    Route::get('/contactanos',function(){Mail::to('proveedores@gmail.com')->send(new ContactanosMailable);})->name('contactanos');
 
     /*
     ***********************************************************************
@@ -170,11 +184,13 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     // ruta recursos
     Route::resource('store', StoreController::class);
 
+    Route::put('/store/{id}/confirm', [StoreController::class, 'updateStatus'])->name('status.update');
+
     // List JSON
-    Route::get('/store/list-store', [StoreController::class, 'getStore'])->name('storeList');
+    Route::get('/store/list-store', [StoreController::class, 'search'])->name('storeList');
 
     // Info
-    Route::get('/store/{store}', [StoreController::class, 'getInfo'])->name('infoStore');
+    Route::get('/store/{store}', [StoreController::class, 'search'])->name('infoStore');
     
     //Suspended
     Route::post('/store-inactive/{store}', [StoreController::class, 'inactive'])->name('storeInactived');
@@ -182,6 +198,11 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     //Actived
     Route::post('/store-active/{store}', [StoreController::class, 'active'])->name('storeActived');
 
+    // List JSON
+    Route::get('/stores/list-stores', [StoreController::class, 'getStores'])->name('storesList');
+
+    // Info
+    Route::get('/stores/{store}', [StoreController::class, 'getInfo'])->name('infoStore');
 
 
 
