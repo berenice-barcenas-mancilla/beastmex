@@ -118,6 +118,8 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
 
     Route::post('cart/Comprar', [CartController::class, 'comprar'])->name('comprar');
 
+    Route::get('seller/{id}/pdf', [SellerController::class, 'generatePDF'])->name('VentasPDF');
+
     /*
     ***********************************************************************
     >>>> Shop catalogue

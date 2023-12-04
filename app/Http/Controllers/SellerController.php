@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Seller;
 use App\Models\Store;
 use Administration\Users\Create\Add;
 use Administration\Users\Update\Adjust;
+use PDF;
+
 
 use Exception;
 use Illuminate\Http\Request;
@@ -46,7 +49,7 @@ class SellerController extends Controller
     public function indexVentas()
     {
         $PAGE_NAVIGATION = "SELLER";
-        $sells = Store::all();
+        $sells = Seller::all();
 
         return view('admin.ventas.ventas_dashboard', compact('PAGE_NAVIGATION', 'sells'));
     }
@@ -87,5 +90,21 @@ class SellerController extends Controller
 
         return redirect('/seller/products')->with('confirmacionVenta','Venta realizada con éxito');
     }
+
+    
+
+    
+    public function generatePDF(string $id)
+{
+    $sellers = DB::table('seller')->where('id', $id)->get(); // Assuming you want multiple records
+    
+    $pdf = PDF::loadView('admin.ventas.pdf', [
+        'sellers' => $sellers,
+    ]);
+
+    return $pdf->stream('prueba.pdf');
+}
+
+
 
 }
