@@ -21,6 +21,7 @@ class Supplier extends Model
     protected $fillable = [
         'supplier',
         'description',
+        'email',
         'status'
     ];
 
@@ -44,15 +45,5 @@ class Supplier extends Model
 
 
     
-
-    // ***************************************************
-    // Relationship
-    // ***************************************************
-    public function shops()
-    {
-        return $this->belongsToMany(Shop::class, 'shop_supplier') 
-                    ->withPivot('application_date', 'delivery_date', 'status', 'description', 'amount', 'state', 'document_support', 'employee_id','uniform_id','id');
-    }
-
 
 }

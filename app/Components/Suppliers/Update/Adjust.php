@@ -30,6 +30,7 @@ class Adjust
         $validator = Validator::make($this->supplierData->all(), [
             'supplier'     => 'required|string|max:99',
             'description'  => 'required|string|max:191',
+            'email'        => 'required|email|max:191|:suppliers,email',
         ]);
 
         return $validator;
@@ -85,12 +86,11 @@ class Adjust
      */
     public function setup()
     {
-        $data = [];
-
-        // Se añaden los datos del proveedor al array
-        $data = Arr::add($data, 'supplier', $this->supplierData['supplier']);
-        $data = Arr::add($data, 'description', $this->supplierData['description']);
-
+        $data = [
+            'supplier' => $this->supplierData['supplier'],
+            'description' => $this->supplierData['description'],
+            'email' => $this->supplierData['email'],
+        ];
         return $data;
     }
 }

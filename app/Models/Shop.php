@@ -9,19 +9,35 @@ class Shop extends Model
 {
     use HasFactory;
 
+    /**
+     * 
+     * Los atributos que son asignables de manera masiva.
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'supplier_id',
+        'product_id',
+        'amount',
+        'fecha_compra',
+        'document_file'
+    ];
 
-    
     // ***************************************************
-    // Relationship
+    // MÉTODO
     // ***************************************************
 
     /**
-     * Uniformes asociados a empleados
-     **/
-    public function uniforms()
+     * Método que permite extraer todos los proveedores de la base de datos, ordenados por el atributo 'supplier'.
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getShops() 
     {
-        return $this->belongsToMany(Uniform::class, 'employee_uniforms')
-                    ->withPivot('application_date', 'delivery_date', 'status', 'description', 'amount', 'state', 'document_support', 'employee_id','uniform_id','id');
+        // Consulta a la base de datos para obtener todos los proveedores ordenados por 'supplier'.
+        $shops = Shop::
+            orderBy('shop')
+            ->get();
+        // Devuelve la colección de proveedores obtenida de la base de datos.
+        return $shops;
     }
 
 }

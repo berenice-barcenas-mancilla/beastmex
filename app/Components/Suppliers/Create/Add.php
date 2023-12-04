@@ -25,8 +25,10 @@ class Add
     {
         // Se crea un validador utilizando la clase Validator de Laravel
         $validator = Validator::make($this->supplierData->all(), [
-            'supplier'      => 'required|string|max:99',        // Nombre del proveedor obligatorio, tipo string y máximo 99 caracteres
-            'description'   => 'required|string|max:191',       // Descripción obligatoria, tipo string y máximo 191 caracteres
+            'supplier' => 'required|string|max:99',        // Nombre del proveedor obligatorio, tipo string y máximo 99 caracteres
+            'description' => 'required|string|max:191',       // Descripción obligatoria, tipo string y máximo 191 caracteres
+            'email' => 'required|email|max:191|unique:suppliers,email',
+
         ]);
 
         // Se devuelve el validador
@@ -35,7 +37,7 @@ class Add
 
     // Método para agregar un nuevo proveedor
     public function newSupplier()
-    {   
+    {
         // Se realiza la validación de los datos del proveedor
         $validator = $this->validate();
 
@@ -49,7 +51,7 @@ class Add
                     ->withErrors([$this->supplierData['supplier'] => "El nombre del proveedor ya está registrado."])
                     ->withInput();
             }
-            
+
             try {
                 // Se inicia una transacción de base de datos para asegurar la atomicidad de la operación
                 DB::transaction(function () {
@@ -60,11 +62,11 @@ class Add
                 // Si la transacción es exitosa, se redirecciona a la página de proveedores con un mensaje de éxito
                 return redirect('/suppliers')
                     ->with('status', 'Proveedor registrado satisfactoriamente');
-            
+
             } catch (Exception $e) {
                 // En caso de error, se redirecciona a la página de proveedores con un mensaje de error
                 return redirect('/suppliers')
-                    ->with('errorsDB', 'Ocurrió un error al registrar el proveedor en la base de datos. Si persiste el problema, consulte a su administrador.');                
+                    ->with('errorsDB', 'Ocurrió un error al registrar el proveedor en la base de datos. Si persiste el problema, consulte a su administrador.');
             }
 
             // Se redirecciona a la ruta de proveedores (¿Este return es necesario?)
@@ -79,19 +81,20 @@ class Add
     }
 
     /**
-    * Configura los datos del proveedor antes de ser guardados
-    * @return array
-    */
+     * Configura los datos del proveedor antes de ser guardados
+     * @return array
+     */
     public function setup()
     {
-        // Se inicializa un array vacío para almacenar los datos del proveedor
-        $data = [];
-        
-        // Se agrega el nombre y la descripción del proveedor al array
-        $data = Arr::add($data, 'supplier', $this->supplierData['supplier']);
-        $data = Arr::add($data, 'description', $this->supplierData['description']);
+        // Se inicializa un array asociativo con los datos del proveedor
+        $data = [
+            'supplier' => $this->supplierData['supplier'],
+            'description' => $this->supplierData['description'],
+            'email' => $this->supplierData['email'],
+        ];
 
         // Se devuelve el array con los datos del proveedor
         return $data;
     }
+
 }

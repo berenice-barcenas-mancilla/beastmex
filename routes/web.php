@@ -112,25 +112,25 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     ***********************************************************************
     */
     // List
-    Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+    Route::get('/shops', [ShopController::class, 'index'])->name('shops');
     
     // List JSON
-    Route::get('/shop/list-shop', [ShopController::class, 'getShop'])->name('shopList');
+    Route::get('/shops/list-shops', [ShopController::class, 'getShop'])->name('shopsList');
 
     // Info
-    Route::get('/shop/{shop}', [ShopController::class, 'getInfo'])->name('infoShop');
+    Route::get('/shops/{shop}', [ShopController::class, 'getInfo'])->name('infoShop');
 
     // Update
-    Route::patch('/shop-update/{shop}', [ShopController::class, 'update'])->name('updateShop');
+    Route::patch('/shops-update/{shop}', [ShopController::class, 'update'])->name('updateShop');
 
     //Store
-    Route::post('/shop', [ShopController::class, 'store'])->name('shopStore');
+    Route::post('/shops', [ShopController::class, 'store'])->name('shopStore');
         
     //Suspended
-    Route::post('/shop-inactive/{shop}', [ShopController::class, 'inactive'])->name('shopInactived');
+    Route::post('/shops-inactive/{shop}', [ShopController::class, 'inactive'])->name('shopInactived');
 
     //Actived
-    Route::post('/shop-active/{shop}', [ShopController::class, 'active'])->name('shopActived');
+    Route::post('/shops-active/{shop}', [ShopController::class, 'active'])->name('shopActived');
 
     /*
     ***********************************************************************
@@ -184,6 +184,11 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     //Actived
     Route::post('/store-active/{store}', [StoreController::class, 'active'])->name('storeActived');
 
+    // List JSON
+    Route::get('/stores/list-stores', [StoreController::class, 'getStores'])->name('storesList');
+
+    // Info
+    Route::get('/stores/{store}', [StoreController::class, 'getInfo'])->name('infoStore');
 
 
 

@@ -60,6 +60,13 @@
 
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Correo *</b> </label>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <input type="email" class="form-control" id="email" required name="email" placeholder="Ingresa el correo" value="{{ old('email') }}"/>
+                        </div>
+                    </div>
                 
                 </div> 
                 

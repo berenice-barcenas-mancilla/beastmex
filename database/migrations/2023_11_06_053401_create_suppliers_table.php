@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('supplier');
             $table->string('description');
+            $table->string('email');
             $table->enum('status', ['Active', 'Suspended'])->default('Active');
             $table->timestamps();
         });
