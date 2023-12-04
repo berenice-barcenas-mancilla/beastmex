@@ -29,22 +29,7 @@
                 </div>
             </div>
                                                 
-            <form class="form" method="post" id="newFormVentas" action="/seller/venta">
-                {{ csrf_field() }}
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Fecha *</b> </label>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="date" class="form-control" id="name" required name="name" placeholder="Ingresa el nombre"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Cliente *</b> </label>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" id="cliente" required name="cliente" placeholder=""/>
-                        </div>
-                    </div>
+                
                     
                     <div class="form-group row align-center">
 
@@ -52,37 +37,86 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Producto</th>
-                                    <th scope="col">Marca</th>
                                     <th scope="col">Cantidad</th>
                                     <th scope="col">Precio</th>
+                                    <th scope="col">Remover</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (Cart::count())
+                                @foreach (Cart::content() as $item)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Soy</td>
-                                    <td>El</td>
-                                    <td>Ticket</td>
-                                </tr>                      
+                                    <th scope="row">{{$item->name}}</th>
+                                    <td>{{$item->qty}}</td>
+                                    <td>{{number_format($item->qty * $item->price,2)}}</td>
+                                    <td>
+                                            <form action="{{route('removeitem')}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="rowId" value="{{$item->rowId}}">
+                                            <button type="submit" class="btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                </svg>
+                                            </button>
+                                            </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <tr>
+                                    <th scope="row">Ingresa un producto</th>
+                                </tr>
+                                @endif                      
                             </tbody>
                         </table>
+                    </div>
+
+                    <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Fecha *</b> </label>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <input type="date" class="form-control" id="fecha" required name="fecha">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Cliente *</b> </label>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <input type="text" class="form-control" id="cliente" required name="cliente">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Subtotal</b> </label>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <input type="text" class="form-control" required readonly name="total" placeholder="{{Cart::subtotal()}}"> 
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Tax (21%)</b> </label>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <input type="text" class="form-control" required readonly name="total" placeholder="{{Cart::tax()}}"> 
+                        </div>
                     </div>
                     
                     
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Total *</b> </label>
                         <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" required readonly name="total" placeholder="1,900.00"> 
+                            <input type="text" class="form-control" required readonly name="total" placeholder="{{Cart::total()}}"> 
                         </div>
                     </div>
                     
                 </div> 
                 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light-danger font-weight-bold" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-success font-weight-bold">Comprar</button>
+            
+                    <button type="button" class="btn btn-light-danger font-weight-bold" data-dismiss="modal">Cerrar</button>
                 </div>                
-            </form>
+            
         </div>
     </div>
 </div>

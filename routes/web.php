@@ -11,6 +11,7 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,6 +96,15 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     */
         
     Route::get('/seller', [SellerController::class, 'indexVentas'])->name('ventas.dashboard');
+
+    Route::post('cart/add', [CartController::class, 'add'])->name('add');
+
+    Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
+
+    Route::get('cart/clear', [CartController::class, 'clear'])->name('clear');
+
+    Route::post('cart/removeitem', [CartController::class, 'removeItem'])->name('removeitem');
+
     Route::get('/seller/products', [SellerController::class, 'productos_list'])->name('ventas.products');
     Route::post('/seller/add',[SellerController::class,'productos_add'])->name('ventas.add');
     Route::post('/seller/venta',[SellerController::class,'venta_add'])->name('ventas.venta');
