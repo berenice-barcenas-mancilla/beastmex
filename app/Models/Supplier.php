@@ -21,6 +21,7 @@ class Supplier extends Model
     protected $fillable = [
         'supplier',
         'description',
+        'email',
         'status'
     ];
 
@@ -44,18 +45,5 @@ class Supplier extends Model
 
 
     
-
-    // ***************************************************
-    // Relationship
-    // **************************************************
-
-    /**
-     * Compras asociadas al proveedor
-     **/
-    public function shops()
-    {
-        return $this->hasMany(Shop::class, 'supplier_id');
-    }
-
 
 }

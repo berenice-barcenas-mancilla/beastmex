@@ -123,6 +123,31 @@ class StoreController extends Controller
 }
 
 
-    
-    
+/***********************************
+*SHOPS METHODS
+************************************/
+public function getStores(Request $request)
+{
+    // Obtiene la lista de compras
+    $stores = Store::getStores();
+    // Retorna la lista de compras en formato JSON
+    return response()->json(['data' => $stores]);
+}
+
+/**
+ * Permite consultar un compras extrayendo toda su información.
+ * @param  \App\Models\Store $store 
+ * @return \Illuminate\Http\Response
+ */
+public function getInfo(Store  $store)
+{
+    // Verifica si el compras existe
+    if (!isset($store->id)){
+        return response()->json(['exito'=>false]);   
+    } else {
+        // Retorna la información del compras en formato JSON
+        return response()->json(['exito'=>true, 'shop' => $store]);   
+    }
+}
+
 }
