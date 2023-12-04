@@ -19,7 +19,9 @@ class Shop extends Model
         'product_id',
         'amount',
         'fecha_compra',
-        'document_file'
+        'document_file',
+        'status'
+
     ];
 
     // ***************************************************
@@ -34,10 +36,24 @@ class Shop extends Model
     {
         // Consulta a la base de datos para obtener todos los proveedores ordenados por 'supplier'.
         $shops = Shop::
-            orderBy('shop')
+            orderBy('fecha_compra')
             ->get();
         // Devuelve la colección de proveedores obtenida de la base de datos.
         return $shops;
+    }
+
+    // ***************************************************
+    // RELATIONSHIPS
+    // ***************************************************
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Store::class);
     }
 
 }

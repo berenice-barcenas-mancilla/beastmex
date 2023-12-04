@@ -29,10 +29,10 @@ class RoleSeeder extends Seeder
 
             ['group' => 'Catálogos',                          'name' => "system.catalogue.view",                            'description' => "Permiso para visualizar el apartado de catálogos",                                    'permisos' =>  collect(['all'])],
 
-            ['group' => 'Compras',                          'name' => "system.shop.list",                       'description' => "Permiso para acceder al listado de compras",                              'permisos' => collect(['all'])],
-            ['group' => 'Compras',                          'name' => "system.shop.create",                     'description' => "Permiso para registrar nuevas compras",                                   'permisos' => collect(['all'])],
-            ['group' => 'Compras',                          'name' => "system.shop.edit",                       'description' => "Permiso para editar la información de las compras",                       'permisos' => collect(['all'])],
-            ['group' => 'Compras',                          'name' => "system.shop.status",                     'description' => "Permiso para activar/suspender compras",                                  'permisos' => collect(['all'])],
+            ['group' => 'Compras',                          'name' => "system.shop.list",                       'description' => "Permiso para acceder al listado de ordenes de compras",                              'permisos' => collect(['all'])],
+            ['group' => 'Compras',                          'name' => "system.shop.create",                     'description' => "Permiso para registrar nuevas ordenes de compras",                                   'permisos' => collect(['all'])],
+            ['group' => 'Compras',                          'name' => "system.shop.status",                     'description' => "Permiso para cambia estatus entregar/solicitada de orden de compras",                                  'permisos' => collect(['all'])],
+            ['group' => 'Compras  ',                        'name' => "system.shop.view",                       'description' => "Permiso para ver la orden de compras",                                        'permisos' =>  collect(['all'])],
 
             
             ['group' => 'Grupos y permisos',                'name' => "system.groups.list",                     'description' => "Permiso para acceder al listado de grupos y permisos",                    'permisos' =>  collect(['all'])],

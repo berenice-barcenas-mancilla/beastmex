@@ -66,6 +66,8 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <input type="email" class="form-control" id="email" required name="email" placeholder="Ingresa el correo" value="{{ old('email') }}"/>
                         </div>
+                        <p class="text-warning">{{ $errors->first('email') }}</p>
+
                     </div>
                 
                 </div> 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->date('fecha_compra')->nullable();
             $table->string('document_file')->nullable();
+            $table->enum('status', ['Solicitada', 'Entregada'])->default('Solicitada');
             $table->timestamps();
             $table->foreign('supplier_id')->references('id')->on('suppliers')
                 ->onDelete('cascade')->onUpdate('cascade');

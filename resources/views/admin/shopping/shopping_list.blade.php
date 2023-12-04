@@ -33,11 +33,11 @@
                             </div>
 
                             <div class="col-md-4 my-2 my-md-0">
-                                <select class="form-control" id="kt_datatable_search_field">
-                                    <option value="nombre">Nombre</option>
-                                    <option value="noDeSerie">Número de Serie</option>
-                                </select>
-                            </div>
+    <select class="form-control" id="kt_datatable_search_field">
+        <option value="nombre">Nombre</option>
+        <option value="noDeSerie">Número de Serie</option>
+    </select>
+</div>
 
                         </div>
                     </div>
@@ -46,7 +46,7 @@
             <!--end::Search Form-->
 
             <!--begin: Datatable-->
-            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_productos"></div>
             <!--end: Datatable-->
         </div>
     </div>
@@ -117,7 +117,7 @@
             <!--end::Search Form-->
 
             <!--begin: Datatable-->
-            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_compras"></div>
             <!--end: Datatable-->
 
 
@@ -125,31 +125,10 @@
     </div>
     <!--end::Card-->
 
-    {{-- manejo de mensajes modulo almacen --}}
-    @if (session()->has('Exito'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: "{{ session('Exito') }}",
-            });
-        </script>
-    @endif
-
-    @if ($errors->any())
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se envió el formulario, por favor verifique los datos',
-            });
-        </script>
-    @endif
 @endsection
 
 @section('modals')
     @include('admin.forms.shopping.create')
-    @include('admin.forms.shopping.edit')
 @endsection
 
 
@@ -160,6 +139,7 @@
         var HOST_URL = "{{ env('APP_HOST', 'http://127.0.0.1:8000') }}";
         var editShop = false;
         var statusShop= false;
+        var ver = false;
 
         {{-- Verificamos el permiso para editar compras --}}
         @can('system.shop.edit')
@@ -170,11 +150,14 @@
         @can('system.shop.status')
             statusShop = true;
         @endcan
+        @can('system.shop.view')
+             ver = true;
+         @endcan
     </script>
 
-    <!--begin::Page Scripts(used by this page)-->
-    <script src="js/admin/stores.js?v=1.0.5"></script>
-    <script src="js/admin/shops.js?v=1.0.3"></script>
+    <!--begin::Page Scripts(used by this page)
+    <script src="js/admin/stores.js?v=1.0.5"></script>-->
+  <script src="js/admin/shops.js?v=1.0.7"></script> 
     
     <script>
         {{-- Mostramos mensajes Toastr si existen --}}
