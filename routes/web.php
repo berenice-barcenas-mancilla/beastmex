@@ -106,8 +106,9 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     Route::post('cart/removeitem', [CartController::class, 'removeItem'])->name('removeitem');
 
     Route::get('/seller/products', [SellerController::class, 'productos_list'])->name('ventas.products');
-    Route::post('/seller/add',[SellerController::class,'productos_add'])->name('ventas.add');
-    Route::post('/seller/venta',[SellerController::class,'venta_add'])->name('ventas.venta');
+
+    Route::post('cart/Comprar', [CartController::class, 'comprar'])->name('comprar');
+
     /*
     ***********************************************************************
     >>>> Shop catalogue

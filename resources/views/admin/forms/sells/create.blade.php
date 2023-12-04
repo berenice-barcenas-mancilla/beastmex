@@ -31,7 +31,7 @@
                                                 
                 
                     
-                    <div class="form-group row align-center">
+                    <div class="container row align-center">
 
                         <table class="table">
                             <thead>
@@ -70,8 +70,11 @@
                                 @endif                      
                             </tbody>
                         </table>
+                        <a href="{{route('clear')}}" class="text-center">Vaciar Carrito</a>
                     </div>
 
+                    <form action="{{route('comprar')}}" method="post">
+                    @csrf
                     <div class="modal-body">
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Fecha *</b> </label>
@@ -90,14 +93,14 @@
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Subtotal</b> </label>
                         <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" required readonly name="total" placeholder="{{Cart::subtotal()}}"> 
+                            <input type="text" class="form-control" required readonly name="subtotal" placeholder="{{Cart::subtotal()}}"> 
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Tax (21%)</b> </label>
                         <div class="col-lg-4 col-md-4 col-sm-12">
-                            <input type="text" class="form-control" required readonly name="total" placeholder="{{Cart::tax()}}"> 
+                            <input type="text" class="form-control" required readonly name="tax" placeholder="{{Cart::tax()}}"> 
                         </div>
                     </div>
                     
@@ -113,7 +116,7 @@
                 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success font-weight-bold">Comprar</button>
-            
+                </form>
                     <button type="button" class="btn btn-light-danger font-weight-bold" data-dismiss="modal">Cerrar</button>
                 </div>                
             
