@@ -162,11 +162,13 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     // ruta recursos
     Route::resource('store', StoreController::class);
 
+    Route::put('/store/{id}/confirm', [StoreController::class, 'updateStatus'])->name('status.update');
+
     // List JSON
-    Route::get('/store/list-store', [StoreController::class, 'getStore'])->name('storeList');
+    Route::get('/store/list-store', [StoreController::class, 'search'])->name('storeList');
 
     // Info
-    Route::get('/store/{store}', [StoreController::class, 'getInfo'])->name('infoStore');
+    Route::get('/store/{store}', [StoreController::class, 'search'])->name('infoStore');
     
     //Suspended
     Route::post('/store-inactive/{store}', [StoreController::class, 'inactive'])->name('storeInactived');
