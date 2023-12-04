@@ -28,11 +28,15 @@ class StoreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( Request $request  )
     {
         $PAGE_NAVIGATION = "STORE";
-        $allProducts = Store::all();
-        return view('admin.store.storeproducts_list', compact('PAGE_NAVIGATION', 'allProducts'));
+        $searchby = $request->get('searchby');
+        $allProducts = Store::where('nombre', 'like', '%' . $searchby . '%')
+            ->orWhere('noDeSerie', 'like', '%' . $searchby . '%')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        return view('admin.store.storeproducts_list', compact('PAGE_NAVIGATION', 'allProducts', 'searchby'));
     }
 
     /**
@@ -83,6 +87,22 @@ class StoreController extends Controller
         if (!Gate::allows('system.store.edit')) {
             abort(403, "No estas autorizado para registrar información");
         }
+    
+        $validatedData = $request->validate([
+            'txtName' => 'string|required',
+            'txtSerialNumber' => 'integer|required',
+            'txtStock' => 'integer|required',
+            'brand' => 'required',
+            'txtPurchaseCost' => 'numeric|required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        // Verificar si se ha enviado un archivo válido
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $imageName = $request->txtSerialNumber . '_' . time() . '.' . $request->file('photo')->extension();
+            $request->file('photo')->move(public_path('images'), $imageName);
+        }
+    
         $updateProducto = Store::findOrFail($id);
         $updateProducto->nombre = $request->input('txtName');
         $updateProducto->noDeSerie = $request->input('txtSerialNumber');
@@ -91,11 +111,24 @@ class StoreController extends Controller
         $updateProducto->costoCompra = $request->input('txtPurchaseCost');
         $updateProducto->precioVenta = $request->input('txtPurchaseCost') + ($request->input('txtPurchaseCost') * 0.55);
         $updateProducto->fechaIngreso = $request->input('txtEntryDate');
+    
+        // Verificar nuevamente si se ha enviado un archivo y actualizar la foto
+        if ($request->hasFile('photo')) {
+            $updateProducto->foto = $imageName;
+        } else {
+            // Si no se ha enviado un nuevo archivo, mantener la foto existente
+            $updateProducto->foto = $updateProducto->foto;
+        }
+    
         $updateProducto->estatus = $request->input('status');
         $updateProducto->update();
-        return redirect('/store')->with('Exito',  'El producto ' . $updateProducto->nombre . ' se ha actualizado con éxito');
-        
-            }
+    
+        return redirect('/store')->with('Exito', 'El producto ' . $updateProducto->nombre . ' se ha actualizado con éxito');
+    }
+    
+
+
+
     /**
      * change the status from storage.
      */
@@ -123,42 +156,42 @@ class StoreController extends Controller
 }
 
 
-/***********************************
-*SHOPS METHODS
-************************************/
-public function getStores(Request $request)
-{
-    // Obtiene la lista de compras
-    $stores = Store::getStores();
-    // Retorna la lista de compras en formato JSON
-    return response()->json(['data' => $stores]);
-}
-
-/**
- * Permite consultar un compras extrayendo toda su información.
- * @param  \App\Models\Store $store 
- * @return \Illuminate\Http\Response
- */
-public function getInfo(Store  $store)
-{
-    // Verifica si el compras existe
-    if (!isset($store->id)){
-        return response()->json(['exito'=>false]);   
-    } else {
-        // Retorna la información del compras en formato JSON
-        return response()->json(['exito'=>true, 'shop' => $store]);   
-
+    /***********************************
+    *SHOPS METHODS
+    ************************************/
+    public function getStores(Request $request)
+    {
+        // Obtiene la lista de compras
+        $stores = Store::getStores();
+        // Retorna la lista de compras en formato JSON
+        return response()->json(['data' => $stores]);
     }
 
+    /**
+     * Permite consultar un compras extrayendo toda su información.
+     * @param  \App\Models\Store $store 
+     * @return \Illuminate\Http\Response
+     */
+    public function getInfo(Store  $store)
+    {
+        // Verifica si el compras existe
+        if (!isset($store->id)){
+            return response()->json(['exito'=>false]);   
+        } else {
+            // Retorna la información del compras en formato JSON
+            return response()->json(['exito'=>true, 'shop' => $store]);   
 
-    public function search(Request $request)
-{
-    $query = $request->input('query');
-    $results = Store::where('nombre', 'like', '%' . $query . '%')
-        ->orWhere('noDeSerie', 'like', '%' . $query . '%')
-        ->get();
-    return response()->json($results);
-}
+        }
+
+
+      public function search(Request $request)
+  {
+      $query = $request->input('query');
+      $results = Store::where('nombre', 'like', '%' . $query . '%')
+          ->orWhere('noDeSerie', 'like', '%' . $query . '%')
+          ->get();
+      return response()->json($results);
+  }
 
 
     
