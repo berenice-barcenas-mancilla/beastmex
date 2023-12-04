@@ -52,7 +52,7 @@ class StoreController extends Controller
         }
             $validatedData = $request->validate([
                 'txtName' => 'required|string',
-                'txtSerialNumber' => 'required|integer|unique::stores,noDeSerie',
+                'txtSerialNumber' => 'required|integer',
                 'txtStock' => 'required|integer',
                 'brand' => 'required',
                 'txtPurchaseCost' => 'required|numeric',
@@ -74,7 +74,7 @@ class StoreController extends Controller
         $addProducto->costoCompra = $request->input('txtPurchaseCost');
         $addProducto->precioVenta = $request->input('txtPurchaseCost') + ($request->input('txtPurchaseCost') * 0.55);
         $addProducto->fechaIngreso = $request->input('txtEntryDate');       
-        $addProducto->foto = 'foto';
+        $addProducto->foto = $imageName;
         $addProducto->estatus = $request->input('status');
         $addProducto->save();
         return redirect('/store')->with('Exito',  'El producto ' . $addProducto->nombre . ' se ha registrado con éxito');
@@ -92,7 +92,7 @@ class StoreController extends Controller
     
         $validatedData = $request->validate([
             'txtName' => 'string|required',
-            'txtSerialNumber' => 'integer|required|unique:stores,noDeSerie'.$id.',id',
+            'txtSerialNumber' => 'integer|required',
             'txtStock' => 'integer|required',
             'brand' => 'required',
             'txtPurchaseCost' => 'numeric|required',
