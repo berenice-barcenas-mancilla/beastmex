@@ -60,13 +60,18 @@ class SellerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function productos_list()
+    public function productos_list(Request $request)
     {
         $PAGE_NAVIGATION = "SELLER";
-        $products = Store::all();
         /* $roles = Role::where('id', '!=', 1)->orderBy('name')->get(['id', 'name']); */
 
-        return view('admin.ventas.ventas_list', compact('PAGE_NAVIGATION', 'products'));
+        $searchby = $request->get('searchby');
+        $allProducts = Store::where('nombre', 'like', '%' . $searchby . '%')
+            ->orWhere('marca', 'like', '%' . $searchby . '%')
+            ->orderBy('id', 'asc')
+            ->paginate(10);
+
+        return view('admin.ventas.ventas_list', compact('PAGE_NAVIGATION', 'allProducts', 'searchby'));
     }
 
        /**

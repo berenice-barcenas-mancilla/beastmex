@@ -16,6 +16,7 @@ return new class extends Migration
         $table->string('cliente');
         $table->date('fecha');
         $table->longText('content');
+        $table->decimal('total',12,2);
         $table->timestamps();
     });
     }
