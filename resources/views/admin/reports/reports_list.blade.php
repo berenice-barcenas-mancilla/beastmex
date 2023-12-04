@@ -117,7 +117,7 @@
                             <!--begin::Label-->
                             <div class="dropdown dropdown-inline mr-2">
                                 <button type="button" class="btn btn-light-primary font-weight-bolder"
-                                    data-toggle="modal" data-target="#employeeReportActiveModal">
+                                    data-toggle="modal" data-target="#employeeTrainingModal">
                                     GENERAR REPORTE
                                 </button>
                             </div>
@@ -173,14 +173,14 @@
                             <!--begin::Name-->
                             <div class="my-4">
                                 <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4">
-                                    Gerencia
+                                    Ganancias
                                 </a>
                             </div>
                             <!--end::Name-->
 
                             <!--begin::Label-->
                             <div class="dropdown dropdown-inline mr-2">
-                                <button type="button" class="btn btn-light-primary font-weight-bolder" data-toggle="modal" data-target="#employeeReportSuspendedModal">
+                                <button type="button" class="btn btn-light-primary font-weight-bolder" data-toggle="modal" data-target="#employeeReportActiveModal">
                                     GENERAR REPORTE
                                 </button>
                             </div> <!--end::Label-->
@@ -247,7 +247,7 @@
 
                             <!--begin::Label-->
                             <div class="dropdown dropdown-inline mr-2" >
-                                <button type="button" class="btn btn-light-primary font-weight-bolder" data-toggle="modal" data-target="#employeeTrainingModal">
+                                <button type="button" class="btn btn-light-primary font-weight-bolder" data-toggle="modal" data-target="#employeeReportSuspendedModal">
                                     GENERAR REPORTE
                                 </button>
                             </div>

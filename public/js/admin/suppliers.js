@@ -64,7 +64,17 @@ var KTDatatableAutoColumnHideDemo = function () {
                     sortable: 'asc',
                     template: function (row) {
 
-                        return row.supplier;
+                        return row.description;
+
+                    }
+                },
+                {
+                    field: 'email',
+                    title: 'Email',
+                    sortable: 'asc',
+                    template: function (row) {
+
+                        return row.email;
 
                     }
                 },
@@ -232,6 +242,7 @@ $(document).ready(function () {
 
                 $('#supplierEdit').val(response.supplier.supplier);
                 $('#descriptionEdit').val(response.supplier.description);
+                $('#emailEdit').val(response.supplier.email);
 
                 document.getElementById('editFormSupplier').action = '/suppliers-update/' + supplierId;
 
@@ -277,7 +288,7 @@ var KTLogin = function () {
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validation = FormValidation.formValidation(
-            KTUtil.getById('editFormSupplier'),
+            KTUtil.getById('newFormSupplier'),
             {
                 fields: {
                     supplier: {
@@ -292,6 +303,13 @@ var KTLogin = function () {
                         validators: {
                             notEmpty: {
                                 message: 'Descripcion del proveedor es un campo requerido'
+                            }
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Email del proveedor es un campo requerido'
                             }
                         }
                     }
@@ -313,7 +331,7 @@ var KTLogin = function () {
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validation = FormValidation.formValidation(
-            KTUtil.getById('newFormSupplier'),
+            KTUtil.getById('editFormSupplier'),
             {
                 fields: {
                     supplier: {
@@ -328,6 +346,13 @@ var KTLogin = function () {
                         validators: {
                             notEmpty: {
                                 message: 'Descripcion es un campo requerido'
+                            }
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Email del proveedor es un campo requerido'
                             }
                         }
                     }

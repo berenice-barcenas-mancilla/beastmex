@@ -86,7 +86,7 @@
                                     </span>
                                     <br>
                                     
-                                    <a href="/shop" class="text-success font-weight-bold font-size-h6 mt-2">
+                                    <a href="/shops" class="text-success font-weight-bold font-size-h6 mt-2">
                                         Compras
                                     </a>
                                 </div>

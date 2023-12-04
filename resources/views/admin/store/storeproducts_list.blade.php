@@ -16,8 +16,6 @@
                     Lista de productos
                 </h3>
             </div>
-
-
             @can('system.store.create')
                 <div class="card-toolbar">
                     <div class="dropdown dropdown-inline mr-2">
@@ -141,7 +139,8 @@
 
                             <div>
                                 <!--begin::Button-->
-                                <a href="#" class="btn btn-primary font-weight-bolder">
+                                <a href="/store/list-store" class="btn btn-primary font-weight-bolder"
+                                    id="kt_datatable_search_button">
                                     <span class="svg-icon svg-icon-md">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
@@ -158,6 +157,34 @@
                 </div>
             </div>
             <!--end::Search Form-->
+
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#kt_datatable_search_button').on('click', function() {
+                        // Obtiene el valor del campo de búsqueda
+                        var searchQuery = $('#kt_datatable_search_query').val();
+
+                        // Realiza una solicitud AJAX al servidor para filtrar los resultados
+                        $.ajax({
+                            url: '/store/list-store', // Reemplaza esto con la ruta correcta en tu aplicación
+                            type: 'GET',
+                            data: {
+                                query: searchQuery
+                            },
+                            success: function(data) {
+                                // Actualiza tu tabla con los resultados filtrados
+                                // Aquí puedes implementar la lógica para actualizar la tabla con los resultados recibidos
+                                console.log(data);
+                            },
+                            error: function(error) {
+                                console.error(error);
+                            }
+                        });
+                    });
+                });
+            </script>
+
 
             <!--begin: Datatable-->
             <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
@@ -195,8 +222,10 @@
                         <td>{{ $item->costoCompra }}</td>
                         <td>{{ $item->precioVenta }}</td>
                         <td>{{ $item->fechaIngreso }}</td>
-                        <td>{{ $item->foto }}
-                            <img src="{{ asset('images/box.png') }}" alt="Foto" width="15">
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#imageModal{{ $item->id }}">
+                                <img src="{{ asset('images/' . $item->foto) }}" alt="Foto" width="15">
+                            </a>
                         </td>
                         <td>
                             @if ($item->estatus == 1)
@@ -205,27 +234,26 @@
                                 Inactivo
                             @endif
                         <td>
-                            @can('system.store.status')
-                                @if ($item->estatus == 0)
-                                    <a href="#" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#userStatusModal{{ $item->id }}">
-                                        <img src="{{ asset('images/sun.png') }}" alt="Cambiar estatus" width="15">
-                                    </a>
-                                @else
-                                    <a href="#" class="btn btn-danger">
-                                        <img src="{{ asset('images/moon.png') }}" alt="Cambiar estatus" width="15">
-                                    </a>
-                                @endif
-                            @endcan
                             @can('system.store.edit')
                                 <a href="#" class="btn btn-warning" data-toggle="modal"
                                     data-target="#userEditModal{{ $item->id }}">
                                     <img src="{{ asset('images/edit-circle.png') }}" alt="Editar" width="15">
                                 </a>
                             @endcan
+                            @can('system.store.status')
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#confirmationModal{{ $item->id }}">
+                                    @if ($item->estatus == 0)
+                                        <img src="{{ asset('images/sun.png') }}" alt="Activar" width="15">
+                                    @else
+                                        <img src="{{ asset('images/moon.png') }}" alt="Desactivar" width="15">
+                                    @endif
+                                </button>
+                            @endcan
                         </td>
                     </tr>
                     @include('admin.forms.storage.edit')
+                    @include('admin.forms.storage.status')
                 @endforeach
             </tbody>
         </table>
@@ -235,5 +263,4 @@
 
 @section('modals')
     @include('admin.forms.storage.create')
-
 @endsection

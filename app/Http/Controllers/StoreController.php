@@ -35,13 +35,6 @@ class StoreController extends Controller
         return view('admin.store.storeproducts_list', compact('PAGE_NAVIGATION', 'allProducts'));
     }
 
-    public function index_products()
-    {
-        $PAGE_NAVIGATION = "STORE";
-        $allProducts = Store::all();
-        return view('admin.store.storeproducts_list', compact('PAGE_NAVIGATION', 'allProducts'));
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -57,12 +50,15 @@ class StoreController extends Controller
                 'txtStock' => 'required|integer',
                 'brand' => 'required',
                 'txtPurchaseCost' => 'required|numeric',
-                
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-            $imageName = time() . '.' . $request->txtPhoto->extension();
-            $request->txtPhoto->move(public_path('images'), $imageName);
-
-
+            
+            if (!$request->hasFile('photo') || !$request->file('photo')->isValid()) {
+                return redirect('/store')->with('Error', 'Por favor, seleccione un archivo de imagen válido.');
+            }
+            
+            $imageName = $request->txtSerialNumber . '_' . time() . '.' . $request->file('photo')->extension();
+            $request->file('photo')->move(public_path('images'), $imageName);
 
         $addProducto = new Store();
         $addProducto->nombre = $request->input('txtName');
@@ -77,20 +73,8 @@ class StoreController extends Controller
         $addProducto->save();
         return redirect('/store')->with('Exito',  'El producto ' . $addProducto->nombre . ' se ha registrado con éxito');
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Store $store)
-    {
-        //
-    }
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Store $store)
-    {
-        //
-    }
+   
+    
     /**
      * Update the specified resource in storage.
      */
@@ -111,13 +95,74 @@ class StoreController extends Controller
         $updateProducto->update();
         return redirect('/store')->with('Exito',  'El producto ' . $updateProducto->nombre . ' se ha actualizado con éxito');
         
-
             }
     /**
-     * Remove the specified resource from storage.
+     * change the status from storage.
      */
-    public function destroy(Store $store)
+    public function updateStatus(Request $request, $id)
     {
-        //
+        if (!Gate::allows('system.store.status')) {
+            abort(403, "No estás autorizado para registrar información");
+        }
+
+        $statusProducto = Store::findOrFail($id);
+        $statusProducto->estatus = $statusProducto->estatus == 0 ? 1 : 0;
+        
+        $statusProducto->update();
+        return redirect('/store')->with('Exito', 'El producto ' . $statusProducto->nombre . ' se ha actualizado con éxito');
     }
+
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+    $results = Store::where('nombre', 'like', '%' . $query . '%')
+        ->orWhere('noDeSerie', 'like', '%' . $query . '%')
+        ->get();
+    return response()->json($results);
+}
+
+
+/***********************************
+*SHOPS METHODS
+************************************/
+public function getStores(Request $request)
+{
+    // Obtiene la lista de compras
+    $stores = Store::getStores();
+    // Retorna la lista de compras en formato JSON
+    return response()->json(['data' => $stores]);
+}
+
+/**
+ * Permite consultar un compras extrayendo toda su información.
+ * @param  \App\Models\Store $store 
+ * @return \Illuminate\Http\Response
+ */
+public function getInfo(Store  $store)
+{
+    // Verifica si el compras existe
+    if (!isset($store->id)){
+        return response()->json(['exito'=>false]);   
+    } else {
+        // Retorna la información del compras en formato JSON
+        return response()->json(['exito'=>true, 'shop' => $store]);   
+
+    }
+
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+    $results = Store::where('nombre', 'like', '%' . $query . '%')
+        ->orWhere('noDeSerie', 'like', '%' . $query . '%')
+        ->get();
+    return response()->json($results);
+}
+
+
+    
+    
+}
+
 }
