@@ -31,6 +31,8 @@ class Add
 
         return $validator;
     }
+
+    
     
 
     public function newUser()

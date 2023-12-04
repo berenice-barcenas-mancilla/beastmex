@@ -61,6 +61,13 @@
                                     GENERAR REPORTE
                                 </button>
                             </div>
+                            <br><br>
+                            <div class="dropdown dropdown-inline mr-2">
+                                <button type="button" class="btn btn-light-primary font-weight-bolder" data-toggle="modal"
+                                    data-target="#graficacompras">
+                                    GENERAR GRÁFICA
+                                </button>
+                            </div>
 
 
                         </div>
@@ -119,6 +126,13 @@
                                 <button type="button" class="btn btn-light-primary font-weight-bolder"
                                     data-toggle="modal" data-target="#employeeTrainingModal">
                                     GENERAR REPORTE
+                                </button>
+                            </div>
+                            <br><br>
+                            <div class="dropdown dropdown-inline mr-2">
+                                <button type="button" class="btn btn-light-primary font-weight-bolder" data-toggle="modal"
+                                    data-target="#graficaventas">
+                                    GENERAR GRÁFICA
                                 </button>
                             </div>
                             <!--end::Label-->
@@ -182,6 +196,13 @@
                             <div class="dropdown dropdown-inline mr-2">
                                 <button type="button" class="btn btn-light-primary font-weight-bolder" data-toggle="modal" data-target="#employeeReportActiveModal">
                                     GENERAR REPORTE
+                                </button>
+                            </div>
+                            <br><br>
+                            <div class="dropdown dropdown-inline mr-2">
+                                <button type="button" class="btn btn-light-primary font-weight-bolder" data-toggle="modal"
+                                    data-target="#graficagerencia">
+                                    GENERAR GRÁFICA
                                 </button>
                             </div> <!--end::Label-->
                         </div>
@@ -251,6 +272,9 @@
                                     GENERAR REPORTE
                                 </button>
                             </div>
+
+                            </div>
+
                             <!--end::Label-->
                         </div>
                         <!--end::Body-->
@@ -271,6 +295,13 @@
     @include('admin.forms.reports.mannagement')
     @include('admin.forms.reports.store')
 @endsection
+
+{{-- @section('graphics')
+    @include('admin.forms.graphs.shop')
+    @include('admin.forms.graphs.seller')
+    @include('admin.forms.graphs.mannagement')
+    @include('admin.forms.graphs.store')
+@endsection --}}
 
 @section('script')
 

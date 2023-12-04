@@ -21,6 +21,7 @@ class Adjust
     }
 
     
+    
     public function validate()
     {
         $validator = Validator::make($this->userData->all(), [

@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use phpDocumentor\Reflection\Types\Nullable;
 
+
 class UserSeeder extends Seeder
 {
     /**

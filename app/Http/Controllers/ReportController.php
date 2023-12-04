@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use App\Models\Store;
+use App\Models\Shop;
+use App\Models\Seller;
+use App\Models\Mannagement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\App;
@@ -92,7 +95,17 @@ class ReportController extends Controller
 
     public function generarReporteC(Request $request)
     {
-        
+        $pdf = App::make('dompdf.wrapper');
+
+        $fechaini = $request->input('dateInit');
+
+        $fechafin = $request->input('dateEnd');
+
+        $allShops = Shop::whereBetween('fecha_compra', [$fechaini, $fechafin])->get();
+
+        $pdf->loadView('admin.reports.pdf.reportecompras', compact('allShops','fechaini','fechafin'));
+
+        return $pdf->stream();
     }
 
     public function generarReporteV(Request $request)
@@ -109,10 +122,53 @@ class ReportController extends Controller
     {
         $pdf = App::make('dompdf.wrapper');
 
-        $allProducts = Store::all();
+        $fechaini = $request->input('dateInit');
 
-        $pdf->loadHTML('<h1>Test</h1>');
+        $fechafin = $request->input('dateEnd');
+
+        $allProducts = Store::whereBetween('fechaIngreso', [$fechaini, $fechafin])->get();
+
+        $pdf->loadView('admin.reports.pdf.reportealmacen', compact('allProducts','fechaini','fechafin'));
 
         return $pdf->stream();
     }
+
+    //Graphs
+
+    public function generarGraficaC (Request $request){
+        $PAGE_NAVIGATION = "REPORTS";
+
+        $fechaini = $request->input('dateInit');
+
+        $fechafin = $request->input('dateEnd');
+
+        // Obtener datos desde Eloquent con condición whereBetween
+        $compras = Shop::whereBetween('fecha_compra', [$fechaini, $fechafin])
+            ->get(['product_id', 'amount']);
+
+        // Transformar los datos según sea necesario
+        $labels = $compras->pluck('product_id');
+        $data = $compras->pluck('amount');
+
+        return view('admin.forms.graphs.shop', compact('PAGE_NAVIGATION', 'labels', 'data'));
+    }
+
+    public function generarGraficaA (Request $request){
+        $PAGE_NAVIGATION = "REPORTS";
+
+        return view('admin.forms.graphs.store', compact('PAGE_NAVIGATION'));
+    }
+
+    public function generarGraficaV (Request $request){
+        $PAGE_NAVIGATION = "REPORTS";
+
+        return view('admin.forms.graphs.seller', compact('PAGE_NAVIGATION'));
+    }
+
+    public function generarGraficaG (Request $request){
+        $PAGE_NAVIGATION = "REPORTS";
+
+        return view('admin.forms.graphs.mannagement', compact('PAGE_NAVIGATION'));
+    }
 }
+

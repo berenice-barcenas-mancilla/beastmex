@@ -1,5 +1,5 @@
 {{-- Se incluye la plantilla ya predefinida del menu --}}
-@extends('admin.layouts.app')
+{{-- @extends('admin.layouts.app') --}}
 
 {{-- Se le da el nombre a la sección segun el sitio que se este consultando --}}
 @section('breadcrumb')
@@ -18,12 +18,12 @@
                 <!--begin::Header-->
                 <div class="card-header py-3">
                     <div class="card-title align-items-start flex-column">
-                        <h3 class="card-label font-weight-bolder text-dark">{{ $name }}</h3>
+                        {{-- <h3 class="card-label font-weight-bolder text-dark">{{ $name }}</h3> --}}
                     </div>
 
                         <div class="card-toolbar">
                             <!--begin::Button-->
-                            <a href="{{ $url }}" class="btn btn-primary font-weight-bolder">
+                            {{-- <a href="{{ $url }}" class="btn btn-primary font-weight-bolder"> --}}
                                 <span class="svg-icon svg-icon-md">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -59,13 +59,13 @@
                                         
                                     </div>        
                                                     
-                                </div>
-                                <h5> Periodo de reporte: <p class="text-danger">{{ $date_ini }} - {{ $date_end }}</p> </h5>
+                                {{-- </div>
+                                <h5> Periodo de reporte: <p class="text-danger">{{ $date_ini }} - {{ $date_end }}</p> </h5> --}}
                             </div>
                         </div>
                         <!--end::Search Form-->
             
-                        <h5> Total de registros: {{ $total }}</h5>
+                        {{-- <h5> Total de registros: {{ $total }}</h5> --}}
                         <!--begin: Datatable-->
                         <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
                         <!--end: Datatable-->
