@@ -17,14 +17,6 @@
                 </h3>
             </div>
 
-            {{-- Mostramos el mensaje con la key 'Exito' --}}
-            @if (session()->has('Exito'))
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <strong>{{ session('Exito') }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
             {{-- Verificamos el permiso para crear proveedores --}}
             @can('system.supplier.create')
                 <div class="card-toolbar">
@@ -75,28 +67,6 @@
         </div>
     </div>
     <!--end::Card-->
-
-    {{-- Manejo de mensajes módulo almacen --}}
-    @if (session()->has('Exito'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: "{{ session('Exito') }}",
-            });
-        </script>
-    @endif
-
-    {{-- Mostramos mensajes de error si existen --}}
-    @if ($errors->any())
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se envió el formulario, por favor verifique los datos',
-            });
-        </script>
-    @endif
 @endsection
 
 {{-- Incluimos los modales necesarios --}}
@@ -125,7 +95,7 @@
 
     <!--begin::Page Scripts(used by this page)-->
     <script src="js/admin/suppliers.js?v=1.0.3"></script>
-    
+
     <script>
         {{-- Mostramos mensajes Toastr si existen --}}
         @if (Session::has('status'))

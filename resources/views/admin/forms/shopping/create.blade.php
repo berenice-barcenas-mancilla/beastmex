@@ -68,19 +68,17 @@
 
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Cantidad *</b> </label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input type="number" class="form-control" id="amount" required name="amount" placeholder="Ingresa el cantidad" value="{{ old('amount') }}"/>
+                            <input type="number" class="form-control" id="amount" name="amount" placeholder="Ingresa el cantidad" value="{{ old('amount') }}"/>
                         </div>
-
                     </div>
-
+            
                     <div class="form-group row">
                         <label class="col-form-label text-right col-lg-3 col-sm-12"> <b>Fecha de orden de compra *</b> </label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input type="date" class="form-control" id="fecha_compra" required name="fecha_compra" value="{{ old('fecha_compra') }}"/>
+                            <input type="date" class="form-control" id="fecha_compra" name="fecha_compra" value="{{ old('fecha_compra') }}"/>
                         </div>
                     </div>
                 </div>
@@ -89,7 +87,6 @@
                     <button type="button" class="btn btn-light-primary font-weight-bold"
                         data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary font-weight-bold">
-                        
                         Guardar
                     </button>
                 </div>
@@ -98,3 +95,5 @@
     </div>
 </div>
 <!--end::NewModal-->
+
+

@@ -20,7 +20,7 @@ class Add
     public function validate()
     {
         $validator = Validator::make($this->groupData->all(), [
-            'name'          => 'required|max:191|unique:roles,name'
+            'name' => 'required|max:191|unique:roles,name',
         ]);
 
         return $validator;

@@ -32,12 +32,15 @@ class Shop extends Model
      * Método que permite extraer todos los proveedores de la base de datos, ordenados por el atributo 'supplier'.
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function getShops() 
+    public static function getShops()
     {
         // Consulta a la base de datos para obtener todos los proveedores ordenados por 'supplier'.
-        $shops = Shop::
-            orderBy('fecha_compra')
+        // Eager load the supplier and product relationships
+        $shops = Shop::with('supplier', 'product')
+            ->orderBy('fecha_compra')
             ->get();
+
+
         // Devuelve la colección de proveedores obtenida de la base de datos.
         return $shops;
     }
@@ -48,12 +51,14 @@ class Shop extends Model
 
     public function supplier()
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->hasOne(Supplier::class, 'id', 'supplier_id');
+
     }
 
     public function product()
     {
-        return $this->belongsTo(Store::class);
+        return $this->hasOne(Store::class, 'id', 'product_id');
+
     }
 
 }

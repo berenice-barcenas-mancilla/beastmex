@@ -10,12 +10,9 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Components\Shops\Create\Add;
-use Barryvdh\DomPDF\Facade as PDF;
-
-use Components\Shops\Update\Adjust;
-
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Mail; // Asegúrate de importar la clase Mail
+use App\Mail\ContactanosMailable; // Asumo que tienes una clase ContactanosMailable en la ubicación correcta
 class ShopController extends Controller
 {
     /**
@@ -85,13 +82,18 @@ class ShopController extends Controller
         if (!Gate::allows('system.shop.create')) {
             abort(403, "No estás autorizado para acceder a esta zona");
         }
-     
-        // Utiliza la clase Add para agregar un nuevo proveedor
-        return (new Add($request))->newShop();
+
+        $resultado = (new Add($request))->newShop();
+
+        // Envía el correo electrónico
+        Mail::to('proveedores@gmail.com')->send(new ContactanosMailable());
+        // Puedes agregar más lógica aquí si es necesario
+
+        return $resultado;
 
     }
 
-    
+
 
     /**
      * Permite inactivar un proveedor.

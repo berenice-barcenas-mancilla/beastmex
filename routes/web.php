@@ -153,7 +153,6 @@ Route::group(['middleware' => ['auth', 'is-active']], function() {
     //Actived
     Route::post('/shops-active/{shop}', [ShopController::class, 'active'])->name('shopActived');
 
-    Route::get('/contactanos',function(){Mail::to('proveedores@gmail.com')->send(new ContactanosMailable);})->name('contactanos');
 
     /*
     ***********************************************************************

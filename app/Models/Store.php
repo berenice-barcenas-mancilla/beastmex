@@ -9,7 +9,7 @@ class Store extends Model
 {
     use HasFactory;
 
-    
+
     /**
      * 
      * Los atributos que son asignables de manera masiva.
@@ -35,7 +35,7 @@ class Store extends Model
      * Método que permite extraer todos los productos de la base de datos, ordenados por el atributo 'supplier'.
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function getStores() 
+    public static function getStores()
     {
         // Consulta a la base de datos para obtener todos los productos ordenados por 'supplier'.
         $stores = Store::
@@ -52,14 +52,14 @@ class Store extends Model
      */
     public static function storesList()
     {
-        $stores = Store::select('id', 'nombre', 'noDeSerie','marca','stock', 'costoCompra', 'precioVenta', 'fechaIngreso', 'foto', 'estatus')
+        $stores = Store::select('id', 'nombre', 'noDeSerie', 'marca', 'stock', 'costoCompra', 'precioVenta', 'fechaIngreso', 'foto', 'estatus')
             ->get();
         return $stores;
     }
 
     public function shops()
     {
-        return $this->hasMany(Shop::class);
+        return $this->hasMany(Shop::class, 'product_id', 'id');
     }
 
 
