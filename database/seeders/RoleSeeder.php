@@ -64,6 +64,7 @@ class RoleSeeder extends Seeder
         ]);
 
 
+        
         $permissions->each(function ($permission, $value) use($roleSuperAdmin, $roleAdmin) {
             
             $collection  = $permission['permisos'];
